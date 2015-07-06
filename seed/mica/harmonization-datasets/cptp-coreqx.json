@@ -21,14 +21,14 @@
     "entityType": "Participant",
     "published": false,
     "obiba.mica.HarmonizationDatasetDto.type": {
-        "project": "CPTP_CoreQx",
+        "project": "CPTP",
         "table": "Coreqx_final",
         "studyTables": [
             {
                 "studyId": "atlantic-path",
                 "populationId": "1",
                 "dataCollectionEventId": "2",
-                "project": "CPTP_CoreQx",
+                "project": "CPTP",
                 "table": "Atlantic_Online_coreqx",
                 "name": [
                     {
@@ -47,7 +47,7 @@
                 "studyId": "atlantic-path",
                 "populationId": "1",
                 "dataCollectionEventId": "2",
-                "project": "CPTP_CoreQx",
+                "project": "CPTP",
                 "table": "Atlantic2_coreqx",
     			"name": [
         			{
@@ -66,7 +66,7 @@
                 "studyId": "bcgp",
                 "populationId": "1",
                 "dataCollectionEventId": "2",
-                "project": "CPTP_CoreQx",
+                "project": "CPTP",
                 "table": "Bcgp-onl_coreqx",
     			"name": [
         			{
@@ -85,7 +85,7 @@
                 "studyId": "bcgp",
                 "populationId": "1",
                 "dataCollectionEventId": "2",
-                "project": "CPTP_CoreQx",
+                "project": "CPTP",
                 "table": "Bcgp-tel_coreqx",
     			"name": [
         			{
@@ -104,7 +104,7 @@
                 "studyId": "bcgp",
                 "populationId": "1",
                 "dataCollectionEventId": "2",
-                "project": "CPTP_CoreQx",
+                "project": "CPTP",
                 "table": "Bcgp-opal_coreqx",
     			"name": [
         			{
@@ -123,7 +123,7 @@
                 "studyId": "cag",
                 "populationId": "1",
                 "dataCollectionEventId": "1",
-                "project": "CPTP_CoreQx",
+                "project": "CPTP",
                 "table": "Cag_coreqx",
                 "description": [
                     {
@@ -136,7 +136,7 @@
                 "studyId": "ohs",
                 "populationId": "1",
                 "dataCollectionEventId": "2",
-                "project": "CPTP_CoreQx",
+                "project": "CPTP",
                 "table": "OHS1_coreqx",
     			"name": [
         			{
@@ -155,7 +155,7 @@
                 "studyId": "ohs",
                 "populationId": "1",
                 "dataCollectionEventId": "2",
-                "project": "CPTP_CoreQx",
+                "project": "CPTP",
                 "table": "OHS2_coreqx",
     			"name": [
         			{
@@ -174,7 +174,7 @@
                 "studyId": "ttp",
                 "populationId": "1",
                 "dataCollectionEventId": "2",
-                "project": "CPTP_CoreQx",
+                "project": "CPTP",
                 "table": "TTP_UHLQ_coreqx",
     			"name": [
         			{
@@ -193,7 +193,7 @@
                 "studyId": "ttp",
                 "populationId": "1",
                 "dataCollectionEventId": "2",
-                "project": "CPTP_CoreQx",
+                "project": "CPTP",
                 "table": "TTP_CoreQA_coreqx",
     			"name": [
         			{
