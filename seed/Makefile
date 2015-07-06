@@ -16,7 +16,7 @@ help:
 
 all: seed-opal seed-mica
 
-seed-mica: seed-studies seed-datasets
+seed-mica: seed-studies seed-datasets seed-harmonization-datasets
 
 seed-studies:
 	mica import-zip -mk $(mica_url) -u $(username) -p $(password) -pub ./mica/studies
