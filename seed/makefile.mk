@@ -7,14 +7,15 @@ password=password
 # database name in opal
 database=opal_data
 
-help:
+seed-help:
+	@echo 
 	@echo "Seed Opal and Mica servers with Maelstrom data. Requires opal and mica python clients to be installed."
 	@echo "Targets:"
-	@echo "* make all (Seed opal and mica servers)"
+	@echo "* make seed (Seed opal and mica servers)"
 	@echo "* make seed-opal (Seed opal server)"
 	@echo "* make seed-mica (Seed mica server)"
 
-all: seed-opal seed-mica
+seed: seed-opal seed-mica
 
 seed-mica: seed-studies seed-datasets seed-harmonization-datasets
 
