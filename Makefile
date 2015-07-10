@@ -30,7 +30,7 @@ clean:
 setup-drupal:
 	drush make --prepare-install drupal/drupal-basic.make target/drupal && \
 	chmod -R a+w target/drupal && \
-	ln -s $(CURDIR)/../mica-drupal7-client $(CURDIR)/target/drupal/sites/all/modules/obiba_mica && \
+	ln -s $(CURDIR)/../mica-drupal7 $(CURDIR)/target/drupal/sites/all/modules/obiba_mica && \
 	ln -s $(CURDIR)/../bootstrap-drupal7 $(CURDIR)/target/drupal/sites/all/themes/obiba_bootstrap && \
 	ln -s $(CURDIR)/../agate-drupal7 $(CURDIR)/target/drupal/sites/all/modules/obiba_agate && \
 	ln -s $(CURDIR)/../protobuf-drupal7  $(CURDIR)/target/drupal/sites/all/modules/obiba_protobuf
