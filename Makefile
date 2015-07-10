@@ -30,7 +30,7 @@ clean:
 setup-drupal:
 	drush make --prepare-install drupal/drupal-basic.make target/drupal && \
 	chmod -R a+w target/drupal && \
-	ln -s $(CURDIR)/../mica-drupal7-client/drupal/modules/obiba_mica $(CURDIR)/target/drupal/sites/all/modules/obiba_mica && \
+	ln -s $(CURDIR)/../mica-drupal7-client $(CURDIR)/target/drupal/sites/all/modules/obiba_mica && \
 	ln -s $(CURDIR)/../bootstrap-drupal7 $(CURDIR)/target/drupal/sites/all/themes/obiba_bootstrap && \
 	ln -s $(CURDIR)/../agate-drupal7 $(CURDIR)/target/drupal/sites/all/modules/obiba_agate && \
 	ln -s $(CURDIR)/../protobuf-drupal7  $(CURDIR)/target/drupal/sites/all/modules/obiba_protobuf
@@ -51,8 +51,7 @@ import-sql: create-sql
 
 settings:
 	sed  's/@db_pass@/$(db_pass)/g' drupal/settings.php > target/drupal/sites/default/settings.php
-	cp drupal/.htaccess target/drupal && \
-	cp drupal/bower.json target/drupal
+	cp drupal/.htaccess target/drupal
 
 enable-mica:
 	cd target/drupal && \
