@@ -12,8 +12,8 @@ db_name = drupal
 db_user = root
 db_pass = 1234
 
-include seed/makefile.mk
-include drupal/makefile.mk
+include seed/Makefile
+include drupal/Makefile
 
 help: seed-help drupal-help
 

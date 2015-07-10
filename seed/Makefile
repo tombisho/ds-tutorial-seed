@@ -10,10 +10,11 @@ database=opal_data
 seed-help:
 	@echo 
 	@echo "Seed Opal and Mica servers with Maelstrom data. Requires opal and mica python clients to be installed."
-	@echo "Targets:"
-	@echo "* make seed (Seed opal and mica servers)"
-	@echo "* make seed-opal (Seed opal server)"
-	@echo "* make seed-mica (Seed mica server)"
+	@echo
+	@echo "Available make targets:"
+	@echo "  seed      : Seed opal and mica servers"
+	@echo "  seed-opal : Seed opal server"
+	@echo "  seed-mica : Seed mica server"
 
 seed: seed-opal seed-mica
 

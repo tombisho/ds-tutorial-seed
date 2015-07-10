@@ -14,21 +14,27 @@ db_pass = 1234
 
 drupal-help:
 	@echo
-	@echo "Mica Drupal 7 Client"
+	@echo "Build Mica Drupal7 site with modules/themes: obiba_mica, obiba_agate, obiba_protobuf, obiba_bootstrap."
 	@echo
 	@echo "Available make targets:"
-	@echo "  all          : Clean & setup Drupal with a symlink to Mica modules in target directory and import drupal.sql"
+	@echo "  drupal       : Clean & setup Drupal with a symlink to Mica modules in target directory and import drupal.sql"
 	@echo "  setup-drupal : Setup Drupal with Mica modules in target directory"
 	@echo
 
-drupal: clean setup-drupal www import-sql settings bootstrap enable-mica angular-app enable-obiba-agate devel enable-mica-data-access less-css jquery_update datatables obiba-progressbar cc
+drupal: drupal-clean setup-drupal enable-modules setup-dependencies cc
 
 drupal-clean:
 	rm -rf target/drupal
 
-setup-drupal:
+#
+# Drupal
+#
+
+setup-drupal: prepare-drupal www import-sql settings
+
+prepare-drupal:
 	drush make --prepare-install drupal/drupal-basic.make target/drupal && \
-	chmod -R a+w target/drupal && \
+	chmod -R a+w target/drupal
 	ln -s $(CURDIR)/../mica-drupal7 $(CURDIR)/target/drupal/sites/all/modules/obiba_mica && \
 	ln -s $(CURDIR)/../bootstrap-drupal7 $(CURDIR)/target/drupal/sites/all/themes/obiba_bootstrap && \
 	ln -s $(CURDIR)/../agate-drupal7 $(CURDIR)/target/drupal/sites/all/modules/obiba_agate && \
@@ -49,28 +55,16 @@ import-sql: create-sql
 	mysql -u $(db_user) --password=$(db_pass) $(db_name) < "drupal/drupal-$(drupal_version).sql"
 
 settings:
-	sed  's/@db_name@/$(db_name)/g' drupal/settings.php | sed  's/@db_user@/$(db_user)/g' | sed  's/@db_pass@/$(db_pass)/g'  > target/drupal/sites/default/settings.php
+	sed  's/@db_name@/$(db_name)/g' drupal/settings.php | sed  's/@db_user@/$(db_user)/g' | sed  's/@db_pass@/$(db_pass)/g' > target/drupal/sites/default/settings.php
 	cp drupal/.htaccess target/drupal
 
-enable-mica:
-	cd target/drupal && \
-	drush en -y obiba_mica
+#
+# Mica related Modules
+#
 
-enable-mica-data-access:
-	cd target/drupal && \
-	drush en -y obiba_mica_data_access_request
+enable-modules: enable-bootstrap enable-mica enable-angular-app enable-obiba-agate enable-data-access
 
-enable-obiba-agate:
-	cd target/drupal && \
-	drush en -y obiba_agate
-
-cptp:
-	cd target/drupal && \
-	rm -rf sites/all/modules/cptp/ && \
-	cp -r ~/Dropbox/P3G-OBiBa-Share/mlstr-seed/drupal/cptp sites/all/modules && \
-	drush en -y cptp
-
-bootstrap:
+enable-bootstrap:
 	cd target/drupal && \
 	drush dl -y bootstrap && \
 	drush en -y bootstrap && \
@@ -78,9 +72,29 @@ bootstrap:
 	drush vset -y theme_default obiba_bootstrap && \
 	drush vset -y admin_theme seven
 
-less-css:
-	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css
-	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css
+enable-mica:
+	cd target/drupal && \
+	drush en -y obiba_mica
+
+enable-angular-app:
+	cd target/drupal && \
+	drush en -y obiba_main_app_angular && \
+	rm -rf sites/all/libraries/angular-app  && \
+	drush angular-app
+
+enable-obiba-agate:
+	cd target/drupal && \
+	drush en -y obiba_agate
+
+enable-data-access:
+	cd target/drupal && \
+	drush en -y obiba_mica_data_access_request
+
+#
+# Dependencies
+#
+
+setup-dependencies: jquery_update datatables obiba-progressbar
 
 jquery_update:
 	cd target/drupal && \
@@ -88,11 +102,6 @@ jquery_update:
 	drush en -y jquery_update && \
 	drush vset -y jquery_update_jquery_version 1.8 && \
 	drush vset -y jquery_update_jquery_admin_version 1.8
-
-devel:
-	cd target/drupal && \
-	drush dl -y devel && \
-	drush en -y devel
 
 chart-enable:
 	cd target/drupal && \
@@ -105,7 +114,6 @@ datatables-download:
 	cd target/drupal && \
 	drush datatables-download
 
-
 datatables-plugins-download:
 	cd target/drupal && \
 	drush datatables-plugins-download
@@ -116,11 +124,18 @@ obiba-progressbar:
 	drush vset -y obiba-progressbar-file "dist/obiba-progressbar" && \
 	drush obiba-progressbar-download $(obiba-progressbar-version)
 
-angular-app:
+#
+# Development tools
+#
+
+less-css:
+	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css
+	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css
+
+devel:
 	cd target/drupal && \
-	drush en -y obiba_main_app_angular && \
-	rm -rf sites/all/libraries/angular-app  && \
-	drush angular-app
+	drush dl -y devel && \
+	drush en -y devel
 
 cc:
 	cd target/drupal && drush cc all
