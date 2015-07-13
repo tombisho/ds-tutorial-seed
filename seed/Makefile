@@ -107,6 +107,19 @@ seed-tables:
 	$(call tables-import,SHIP)
 	$(call tables-import,ULSAM)
 
+seed-index:
+	$(call table-index,FNAC,FNAC)
+	$(call table-index,CPTP,Atlantic2_coreqx)
+	$(call table-index,CPTP,Atlantic_Online_coreqx)
+	$(call table-index,CPTP,Bcgp-onl_coreqx)
+	$(call table-index,CPTP,Bcgp-opal_coreqx)
+	$(call table-index,CPTP,Bcgp-tel_coreqx)
+	$(call table-index,CPTP,Cag_coreqx)
+	$(call table-index,CPTP,OHS1_coreqx)
+	$(call table-index,CPTP,OHS2_coreqx)
+	$(call table-index,CPTP,TTP_CoreQA_coreqx)
+	$(call table-index,CPTP,TTP_UHLQ_coreqx)
+
 seed-taxonomies:
 	$(call taxonomy-import,AreaOfInformation)
 	$(call taxonomy-import,Harmonization)
@@ -129,3 +142,5 @@ dataset-create = mica rest -mk $(mica_url) -u $(username) -p $(password) -m POST
 	mica rest -mk $(mica_url) -u $(username) -p $(password) -m PUT /draft/$(1)-dataset/$(2)/_publish
 
 taxonomy-import = opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?repo=maelstrom-taxonomies&file=$(1).yml"
+
+table-index = opal rest -o $(opal_url) -u $(username) -p $(password) -m PUT "/datasource/$(1)/table/$(2)/index"
