@@ -21,7 +21,7 @@ seed: seed-opal seed-mica
 seed-mica: seed-studies seed-datasets seed-harmonization-datasets
 
 seed-studies:
-	mica import-zip -mk $(mica_url) -u $(username) -p $(password) -pub ./mica/studies
+	mica import-zip -mk $(mica_url) -u $(username) -p $(password) -pub ./seed/mica/studies
 
 seed-datasets: seed-study-datasets
 
@@ -119,13 +119,13 @@ seed-taxonomies:
 #
 # Functions
 #
-project-create = sed 's/@database@/$(database)/g' ./opal/projects/project-template.json | sed 's/@name@/$(1)/g' | opal rest -o $(opal_url) -u $(username) -p $(password) -m POST /projects --content-type "application/json"
+project-create = sed 's/@database@/$(database)/g' ./seed/opal/projects/project-template.json | sed 's/@name@/$(1)/g' | opal rest -o $(opal_url) -u $(username) -p $(password) -m POST /projects --content-type "application/json"
 
-tables-import = opal file -o $(opal_url) -u $(username) -p $(password) -up ./opal/dictionaries/$(1).zip /tmp && \
+tables-import = opal file -o $(opal_url) -u $(username) -p $(password) -up ./seed/opal/dictionaries/$(1).zip /tmp && \
 	opal import-xml -o $(opal_url) -u $(username) -p $(password) -pa /tmp/$(1).zip -d $(1) && \
 	while [ `opal rest -o $(opal_url) -u $(username) -p $(password) -m GET /shell/commands -j | grep -ch "NOT_STARTED\|IN_PROGRESS"` -gt 0 ] ; do echo -n "."; sleep 5; done; echo "."
 
-dataset-create = mica rest -mk $(mica_url) -u $(username) -p $(password) -m POST /draft/$(1)-datasets --content-type "application/json" < ./mica/$(1)-datasets/$(2).json && \
+dataset-create = mica rest -mk $(mica_url) -u $(username) -p $(password) -m POST /draft/$(1)-datasets --content-type "application/json" < ./seed/mica/$(1)-datasets/$(2).json && \
 	mica rest -mk $(mica_url) -u $(username) -p $(password) -m PUT /draft/$(1)-dataset/$(2)/_publish
 
 taxonomy-import = opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?repo=maelstrom-taxonomies&file=$(1).yml"
