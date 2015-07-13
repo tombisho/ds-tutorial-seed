@@ -12,6 +12,11 @@ db_name = drupal
 db_user = root
 db_pass = 1234
 
+#
+# www settings
+#
+www=html/drupal
+
 drupal-help:
 	@echo
 	@echo "Build Mica Drupal7 site with modules/themes: obiba_mica, obiba_agate, obiba_protobuf, obiba_bootstrap."
@@ -41,9 +46,9 @@ prepare-drupal:
 	ln -s $(CURDIR)/../protobuf-drupal7  $(CURDIR)/target/drupal/sites/all/modules/obiba_protobuf
 
 www:
-	sudo rm -f /var/www/html/drupal && \
-	sudo ln -s $(CURDIR)/target/drupal /var/www/html/drupal && \
-	sudo chown -R www-data:www-data /var/www/html/drupal
+	sudo rm -f /var/www/$(www) && \
+	sudo ln -s $(CURDIR)/target/drupal /var/www/$(www) && \
+	sudo chown -R www-data:www-data /var/www/$(www)
 
 dump-sql:
 	mysqldump -u $(db_user) --password=$(db_pass) --hex-blob $(db_name) --result-file="drupal/drupal-$(drupal_version).sql"
