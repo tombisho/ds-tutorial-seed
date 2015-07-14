@@ -41,6 +41,9 @@ drupal: drupal-clean setup-drupal enable-modules setup-dependencies cc
 # Install drupal with mica/agate related modules from their release tags
 drupal-release: drupal-clean setup-drupal-release enable-modules setup-dependencies cc
 
+# Install drupal with mica/agate related modules from master branches
+drupal-snapshot: drupal-clean setup-drupal-snapshot
+
 # Prepare drupal installation, for making a clean reference SQL database
 drupal-empty: drupal-clean setup-drupal-empty
 
@@ -51,8 +54,10 @@ drupal-clean:
 # Drupal
 #
 
+# Empty
 setup-drupal-empty: prepare-drupal www create-sql
 
+# Development
 setup-drupal: prepare-drupal www import-sql settings
 
 prepare-drupal: prepare-install-drupal
@@ -61,29 +66,23 @@ prepare-drupal: prepare-install-drupal
 	ln -s $(CURDIR)/../agate-drupal7 $(CURDIR)/target/drupal/sites/all/modules/obiba_agate && \
 	ln -s $(CURDIR)/../protobuf-drupal7  $(CURDIR)/target/drupal/sites/all/modules/obiba_protobuf
 
+# Snapshot (docker for nighlty)
+setup-drupal-snapshot: prepare-drupal-snapshot www import-sql settings
+
+prepare-drupal-snapshot: prepare-install-drupal
+	$(call github-install,mica-drupal7,master,modules,obiba_mica)
+	$(call github-install,agate-drupal7,master,modules,obiba_agate)
+	$(call github-install,protobuf-drupal7,master,modules,obiba_protobuf)
+	$(call github-install,bootstrap-drupal7,master,themes,obiba_bootstrap)
+
+# Release (for demo)
 setup-drupal-release: prepare-drupal-release www import-sql settings
 
 prepare-drupal-release: prepare-install-drupal
-	cd /tmp && rm -f $(mica-drupal7_version).zip && rm -rf mica-drupal7-$(mica-drupal7_version) && \
-	  wget -q https://github.com/obiba/mica-drupal7/archive/$(mica-drupal7_version).zip && \
-	  unzip $(mica-drupal7_version).zip && \
-	  mv mica-drupal7-$(mica-drupal7_version) $(CURDIR)/target/drupal/sites/all/modules/obiba_mica && \
-	  rm -f $(mica-drupal7_version).zip
-	cd /tmp && rm -f $(agate-drupal7_version).zip && rm -rf agate-drupal7-$(agate-drupal7_version) && \
-	  wget -q https://github.com/obiba/agate-drupal7/archive/$(agate-drupal7_version).zip && \
-	  unzip $(agate-drupal7_version).zip && \
-	  mv agate-drupal7-$(agate-drupal7_version) $(CURDIR)/target/drupal/sites/all/modules/obiba_agate && \
-	  rm -f $(agate-drupal7_version).zip
-	cd /tmp && rm -f $(protobuf-drupal7_version).zip && rm -rf protobuf-drupal7-$(protobuf-drupal7_version) && \
-	  wget -q https://github.com/obiba/protobuf-drupal7/archive/$(protobuf-drupal7_version).zip && \
-	  unzip $(protobuf-drupal7_version).zip && \
-	  mv protobuf-drupal7-$(protobuf-drupal7_version) $(CURDIR)/target/drupal/sites/all/modules/obiba_protobuf && \
-	  rm -f $(protobuf-drupal7_version).zip
-	cd /tmp && rm -f $(bootstrap-drupal7_version).zip && rm -rf bootstrap-drupal7-$(bootstrap-drupal7_version) && \
-	  wget -q https://github.com/obiba/bootstrap-drupal7/archive/$(bootstrap-drupal7_version).zip && \
-	  unzip $(bootstrap-drupal7_version).zip && \
-	  mv bootstrap-drupal7-$(bootstrap-drupal7_version) $(CURDIR)/target/drupal/sites/all/themes/obiba_bootstrap && \
-	  rm -f $(bootstrap-drupal7_version).zip
+	$(call github-install,mica-drupal7,$(mica-drupal7_version),modules,obiba_mica)
+	$(call github-install,agate-drupal7,$(agate-drupal7_version),modules,obiba_agate)
+	$(call github-install,protobuf-drupal7,$(protobuf-drupal7_version),modules,obiba_protobuf)
+	$(call github-install,bootstrap-drupal7,$(bootstrap-drupal7_version),themes,obiba_bootstrap)
 
 prepare-install-drupal:
 	drush make --prepare-install drupal/drupal-basic.make target/drupal && \
@@ -199,3 +198,15 @@ devel:
 
 cc:
 	cd target/drupal && drush cc all
+
+
+#
+# Functions
+#
+
+# Install a module/them from a github repository given a tag or a branch name
+github-install = cd /tmp && rm -f $(2).zip && rm -rf $(1)-$(2) && \
+	  wget -q https://github.com/obiba/$(1)/archive/$(2).zip && \
+	  unzip -q $(2).zip && \
+	  mv $(1)-$(2) $(CURDIR)/target/drupal/sites/all/$(3)/$(4) && \
+	  rm -f $(2).zip
