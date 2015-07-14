@@ -172,6 +172,7 @@ obiba-progressbar:
 
 enable-autologout:
 	cd target/drupal && \
+	drush dl -y autologout && \
 	drush en -y autologout && \
 	drush vset -y autologout_redirect_url "<front>" && \
 	drush vset -y autologout_no_dialog TRUE
