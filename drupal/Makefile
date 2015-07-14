@@ -35,9 +35,14 @@ drupal-help:
 	@echo "  drupal-release : Clean & setup Drupal with released Mica modules/themes in target directory and import drupal.sql"
 	@echo
 
+# Install drupal with mica/agate related modules for development
 drupal: drupal-clean setup-drupal enable-modules setup-dependencies cc
 
+# Install drupal with mica/agate related modules from their release tags
 drupal-release: drupal-clean setup-drupal-release enable-modules setup-dependencies cc
+
+# Prepare drupal installation, for making a clean reference SQL database
+drupal-empty: drupal-clean setup-drupal-empty
 
 drupal-clean:
 	rm -rf target/drupal
@@ -45,6 +50,8 @@ drupal-clean:
 #
 # Drupal
 #
+
+setup-drupal-empty: prepare-drupal www create-sql
 
 setup-drupal: prepare-drupal www import-sql settings
 
