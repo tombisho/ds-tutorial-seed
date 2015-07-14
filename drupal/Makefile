@@ -142,8 +142,8 @@ jquery_update:
 	cd target/drupal && \
 	drush dl -y jquery_update && \
 	drush en -y jquery_update && \
-	drush vset -y jquery_update_jquery_version 1.8 && \
-	drush vset -y jquery_update_jquery_admin_version 1.8
+	drush vset -y --format=string jquery_update_jquery_version 1.8 && \
+	drush vset -y --format=string jquery_update_jquery_admin_version 1.8
 
 chart-enable:
 	cd target/drupal && \
@@ -165,6 +165,16 @@ obiba-progressbar:
 	drush vset -y obiba-progressbar-lib obiba-progressbar-$(obiba-progressbar-version) && \
 	drush vset -y obiba-progressbar-file "dist/obiba-progressbar" && \
 	drush obiba-progressbar-download $(obiba-progressbar-version)
+
+#
+# Additional modules
+#
+
+enable-autologout:
+	cd target/drupal && \
+	drush en -y autologout && \
+	drush vset -y autologout_redirect_url "<front>" && \
+	drush vset -y autologout_no_dialog TRUE
 
 #
 # Development tools
