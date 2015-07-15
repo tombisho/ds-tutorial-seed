@@ -58,7 +58,7 @@ drupal-clean:
 setup-drupal-empty: prepare-drupal www create-sql
 
 # Development
-setup-drupal: prepare-drupal www import-sql settings
+setup-drupal: prepare-drupal www import-sql finalize-drupal
 
 prepare-drupal: prepare-install-drupal
 	ln -s $(CURDIR)/../mica-drupal7 $(CURDIR)/target/drupal/sites/all/modules/obiba_mica && \
@@ -67,7 +67,7 @@ prepare-drupal: prepare-install-drupal
 	ln -s $(CURDIR)/../protobuf-drupal7  $(CURDIR)/target/drupal/sites/all/modules/obiba_protobuf
 
 # Snapshot (docker for nigthly)
-setup-drupal-snapshot: prepare-drupal-snapshot www import-sql settings
+setup-drupal-snapshot: prepare-drupal-snapshot www import-sql finalize-drupal
 
 prepare-drupal-snapshot: prepare-install-drupal
 	$(call github-install,mica-drupal7,master,modules,obiba_mica)
@@ -76,7 +76,7 @@ prepare-drupal-snapshot: prepare-install-drupal
 	$(call github-install,bootstrap-drupal7,master,themes,obiba_bootstrap)
 
 # Release (for demo)
-setup-drupal-release: prepare-drupal-release www import-sql settings
+setup-drupal-release: prepare-drupal-release www import-sql finalize-drupal
 
 prepare-drupal-release: prepare-install-drupal
 	$(call github-install,mica-drupal7,$(mica-drupal7_version),modules,obiba_mica)
@@ -102,8 +102,12 @@ create-sql:
 import-sql: create-sql
 	mysql -h $(db_host) -u $(db_user) --password=$(db_pass) $(db_name) < "drupal/drupal-$(drupal_version).sql"
 
+finalize-drupal: settings htaccess
+
 settings:
 	sed  's/@db_name@/$(db_name)/g' drupal/settings.php | sed 's/@db_user@/$(db_user)/g' | sed 's/@db_pass@/$(db_pass)/g'  | sed 's/@db_host@/$(db_host)/g' > target/drupal/sites/default/settings.php
+
+htaccess:
 	cp drupal/.htaccess target/drupal
 
 #
