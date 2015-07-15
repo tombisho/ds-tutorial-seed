@@ -1,8 +1,7 @@
-mica_current_tag = 1.0.3-dev
-mica_branch_version=1.0.x
+#
+# Drupal
+#
 drupal_version = 7.38
-mica_version=$(drupal_version)-$(mica_current_tag)
-drupal_org_mica=git.drupal.org:project/obiba_mica.git
 obiba-progressbar-version=1.0.0
 
 #
@@ -66,7 +65,7 @@ prepare-drupal: prepare-install-drupal
 	ln -s $(CURDIR)/../agate-drupal7 $(CURDIR)/target/drupal/sites/all/modules/obiba_agate && \
 	ln -s $(CURDIR)/../protobuf-drupal7  $(CURDIR)/target/drupal/sites/all/modules/obiba_protobuf
 
-# Snapshot (docker for nighlty)
+# Snapshot (docker for nigthly)
 setup-drupal-snapshot: prepare-drupal-snapshot www import-sql settings
 
 prepare-drupal-snapshot: prepare-install-drupal
