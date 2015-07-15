@@ -10,6 +10,7 @@ obiba-progressbar-version=1.0.0
 db_name = drupal
 db_user = root
 db_pass = 1234
+db_host = localhost
 
 #
 # www settings
@@ -102,7 +103,7 @@ import-sql: create-sql
 	mysql -u $(db_user) --password=$(db_pass) $(db_name) < "drupal/drupal-$(drupal_version).sql"
 
 settings:
-	sed  's/@db_name@/$(db_name)/g' drupal/settings.php | sed  's/@db_user@/$(db_user)/g' | sed  's/@db_pass@/$(db_pass)/g' > target/drupal/sites/default/settings.php
+	sed  's/@db_name@/$(db_name)/g' drupal/settings.php | sed 's/@db_user@/$(db_user)/g' | sed 's/@db_pass@/$(db_pass)/g'  | sed 's/@db_host@/$(db_host)/g' > target/drupal/sites/default/settings.php
 	cp drupal/.htaccess target/drupal
 
 #
