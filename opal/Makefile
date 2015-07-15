@@ -70,9 +70,9 @@ seed-taxonomies:
 #
 # Functions
 #
-project-create = sed 's/@database@/$(database)/g' ./seed/opal/projects/project-template.json | sed 's/@name@/$(1)/g' | opal rest -o $(opal_url) -u $(username) -p $(password) -m POST /projects --content-type "application/json"
+project-create = sed 's/@database@/$(database)/g' ./opal/seed/projects/project-template.json | sed 's/@name@/$(1)/g' | opal rest -o $(opal_url) -u $(username) -p $(password) -m POST /projects --content-type "application/json"
 
-tables-import = opal file -o $(opal_url) -u $(username) -p $(password) -up ./seed/opal/dictionaries/$(1).zip /tmp && \
+tables-import = opal file -o $(opal_url) -u $(username) -p $(password) -up ./opal/seed/dictionaries/$(1).zip /tmp && \
 	opal import-xml -o $(opal_url) -u $(username) -p $(password) -pa /tmp/$(1).zip -d $(1) && \
 	while [ `opal rest -o $(opal_url) -u $(username) -p $(password) -m GET /shell/commands -j | grep -ch "NOT_STARTED\|IN_PROGRESS"` -gt 0 ] ; do echo -n "."; sleep 5; done; echo "."
 
