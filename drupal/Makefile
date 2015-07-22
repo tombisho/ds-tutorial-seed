@@ -21,9 +21,9 @@ www=html/drupal
 # Release tags
 #
 mica-drupal7_version=7.x-1.0.3
-agate-drupal7_version=7.x-1.0.0
+agate-drupal7_version=7.x-1.0.1
 protobuf-drupal7_version=7.x-1.0.0
-bootstrap-drupal7_version=7.x-1.0.3
+bootstrap-drupal7_version=7.x-1.0.4
 
 
 drupal-help:
