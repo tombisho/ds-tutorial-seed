@@ -122,7 +122,7 @@ enable-bootstrap:
 	drush en -y bootstrap && \
 	drush en -y obiba_bootstrap && \
 	drush vset -y theme_default obiba_bootstrap && \
-	drush vset -y admin_theme seven
+	drush vset -y admin_theme obiba_bootstrap
 
 enable-mica:
 	cd target/drupal && \
