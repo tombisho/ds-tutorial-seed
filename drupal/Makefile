@@ -1,7 +1,7 @@
 #
 # Drupal
 #
-drupal_version = 7.38
+drupal_version = 7.39
 obiba-progressbar-version=1.0.0
 
 #
