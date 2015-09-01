@@ -114,15 +114,13 @@ htaccess:
 # Mica related Modules
 #
 
-enable-modules: enable-bootstrap enable-mica enable-angular-app enable-obiba-agate enable-data-access
+enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access
 
 enable-bootstrap:
 	cd target/drupal && \
 	drush dl -y bootstrap && \
 	drush en -y bootstrap && \
-	drush en -y obiba_bootstrap && \
-	drush vset -y theme_default obiba_bootstrap && \
-	drush vset -y admin_theme obiba_bootstrap
+	drush en -y obiba_bootstrap
 
 enable-mica:
 	cd target/drupal && \
@@ -130,13 +128,8 @@ enable-mica:
 
 enable-angular-app:
 	cd target/drupal && \
-	drush en -y obiba_main_app_angular && \
 	rm -rf sites/all/libraries/angular-app  && \
 	drush angular-app
-
-enable-obiba-agate:
-	cd target/drupal && \
-	drush en -y obiba_agate
 
 enable-data-access:
 	cd target/drupal && \
@@ -146,14 +139,7 @@ enable-data-access:
 # Dependencies
 #
 
-setup-dependencies: jquery_update datatables obiba-progressbar
-
-jquery_update:
-	cd target/drupal && \
-	drush dl -y jquery_update && \
-	drush en -y jquery_update && \
-	drush vset -y --format=string jquery_update_jquery_version 1.8 && \
-	drush vset -y --format=string jquery_update_jquery_admin_version 1.8
+setup-dependencies: datatables obiba-progressbar
 
 chart-enable:
 	cd target/drupal && \
@@ -172,8 +158,6 @@ datatables-plugins-download:
 
 obiba-progressbar:
 	cd target/drupal && \
-	drush vset -y obiba-progressbar-lib obiba-progressbar-$(obiba-progressbar-version) && \
-	drush vset -y obiba-progressbar-file "dist/obiba-progressbar" && \
 	drush obiba-progressbar-download $(obiba-progressbar-version)
 
 #
