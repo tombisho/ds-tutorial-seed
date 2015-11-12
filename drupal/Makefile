@@ -3,6 +3,7 @@
 #
 drupal_version = 7.39
 obiba-progressbar-version=1.0.0
+obiba-timeline-version=1.0
 
 #
 # Mysql db access
@@ -87,7 +88,7 @@ prepare-drupal-release: prepare-install-drupal
 prepare-install-drupal:
 	drush make --prepare-install drupal/drupal-basic.make target/drupal && \
 	chmod -R a+w target/drupal
-	
+
 www:
 	sudo rm -f /var/www/$(www) && \
 	sudo ln -s $(CURDIR)/target/drupal /var/www/$(www) && \
@@ -139,7 +140,7 @@ enable-data-access:
 # Dependencies
 #
 
-setup-dependencies: jquery_update datatables obiba-progressbar
+setup-dependencies: jquery_update datatables obiba-progressbar obiba-timeline
 
 chart-enable:
 	cd target/drupal && \
@@ -164,6 +165,10 @@ datatables-plugins-download:
 obiba-progressbar:
 	cd target/drupal && \
 	drush obiba-progressbar-download $(obiba-progressbar-version)
+
+obiba-timeline:
+	cd target/drupal && \
+	drush mica-study-timeline-download $(obiba-timeline-version)
 
 #
 # Additional modules
