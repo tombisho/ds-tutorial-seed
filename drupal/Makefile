@@ -139,12 +139,17 @@ enable-data-access:
 # Dependencies
 #
 
-setup-dependencies: datatables obiba-progressbar
+setup-dependencies: jquery_update datatables obiba-progressbar
 
 chart-enable:
 	cd target/drupal && \
 	drush highcharts-download && \
 	drush en -y charts_highcharts
+
+jquery_update:
+	cd target/drupal && \
+	drush vset -y --format=string jquery_update_jquery_version 1.10 && \
+	drush vset -y --format=string jquery_update_jquery_admin_version 1.10
 
 datatables: datatables-download datatables-plugins-download
 
@@ -185,7 +190,8 @@ devel:
 	drush en -y devel
 
 cc:
-	cd target/drupal && drush cc all
+	cd target/drupal && drush cc all && \
+	sudo chown -R www-data:www-data .
 
 
 #
