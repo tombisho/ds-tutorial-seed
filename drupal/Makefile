@@ -50,7 +50,7 @@ drupal-snapshot: drupal-clean setup-drupal-snapshot
 drupal-empty: drupal-clean setup-drupal-empty
 
 drupal-clean:
-	rm -rf target/drupal
+	rm -rf $(drupal_dir)
 
 #
 # Drupal
@@ -93,8 +93,8 @@ prepare-drupal-modules-release:
 	$(call github-install,bootstrap-drupal7,$(bootstrap-drupal7_version),themes,obiba_bootstrap)
 
 prepare-install-drupal:
-	drush make --prepare-install drupal/drupal-basic.make target/drupal && \
-	chmod -R a+w target/drupal
+	drush make --prepare-install drupal/drupal-basic.make $(drupal_dir) && \
+	chmod -R a+w $(drupal_dir)
 
 www:
 	sudo rm -f /var/www/$(www) && \
@@ -113,10 +113,10 @@ import-sql: create-sql
 finalize-drupal: settings htaccess
 
 settings:
-	sed  's/@db_name@/$(db_name)/g' drupal/settings.php | sed 's/@db_user@/$(db_user)/g' | sed 's/@db_pass@/$(db_pass)/g'  | sed 's/@db_host@/$(db_host)/g' > target/drupal/sites/default/settings.php
+	sed  's/@db_name@/$(db_name)/g' drupal/settings.php | sed 's/@db_user@/$(db_user)/g' | sed 's/@db_pass@/$(db_pass)/g'  | sed 's/@db_host@/$(db_host)/g' > $(drupal_dir)/sites/default/settings.php
 
 htaccess:
-	cp drupal/.htaccess target/drupal
+	cp drupal/.htaccess $(drupal_dir)
 
 #
 # Mica related Modules
