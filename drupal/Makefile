@@ -4,6 +4,7 @@
 drupal_version = 7.39
 obiba-progressbar-version=1.0.0
 obiba-timeline-version=1.0
+drupal_dir=$(CURDIR)/target/drupal
 
 #
 # Mysql db access
@@ -61,16 +62,20 @@ setup-drupal-empty: prepare-drupal www create-sql
 # Development
 setup-drupal: prepare-drupal www import-sql finalize-drupal
 
-prepare-drupal: prepare-install-drupal
-	ln -s $(CURDIR)/../mica-drupal7 $(CURDIR)/target/drupal/sites/all/modules/obiba_mica && \
-	ln -s $(CURDIR)/../bootstrap-drupal7 $(CURDIR)/target/drupal/sites/all/themes/obiba_bootstrap && \
-	ln -s $(CURDIR)/../agate-drupal7 $(CURDIR)/target/drupal/sites/all/modules/obiba_agate && \
-	ln -s $(CURDIR)/../protobuf-drupal7  $(CURDIR)/target/drupal/sites/all/modules/obiba_protobuf
+prepare-drupal: prepare-install-drupal prepare-drupal-modules
+
+prepare-drupal-modules:
+	ln -s $(CURDIR)/../mica-drupal7 $(drupal_dir)/sites/all/modules/obiba_mica && \
+	ln -s $(CURDIR)/../bootstrap-drupal7 $(drupal_dir)/sites/all/themes/obiba_bootstrap && \
+	ln -s $(CURDIR)/../agate-drupal7 $(drupal_dir)/sites/all/modules/obiba_agate && \
+	ln -s $(CURDIR)/../protobuf-drupal7  $(drupal_dir)/sites/all/modules/obiba_protobuf
 
 # Snapshot (docker for nigthly)
 setup-drupal-snapshot: prepare-drupal-snapshot www import-sql finalize-drupal
 
-prepare-drupal-snapshot: prepare-install-drupal
+prepare-drupal-snapshot: prepare-install-drupal prepare-drupal-modules-snapshot
+
+prepare-drupal-modules-snapshot:
 	$(call github-install,mica-drupal7,master,modules,obiba_mica)
 	$(call github-install,agate-drupal7,master,modules,obiba_agate)
 	$(call github-install,protobuf-drupal7,master,modules,obiba_protobuf)
@@ -79,7 +84,9 @@ prepare-drupal-snapshot: prepare-install-drupal
 # Release (for demo)
 setup-drupal-release: prepare-drupal-release www import-sql finalize-drupal
 
-prepare-drupal-release: prepare-install-drupal
+prepare-drupal-release: prepare-install-drupal prepare-drupal-modules-release
+
+prepare-drupal-modules-release:
 	$(call github-install,mica-drupal7,$(mica-drupal7_version),modules,obiba_mica)
 	$(call github-install,agate-drupal7,$(agate-drupal7_version),modules,obiba_agate)
 	$(call github-install,protobuf-drupal7,$(protobuf-drupal7_version),modules,obiba_protobuf)
@@ -91,7 +98,7 @@ prepare-install-drupal:
 
 www:
 	sudo rm -f /var/www/$(www) && \
-	sudo ln -s $(CURDIR)/target/drupal /var/www/$(www) && \
+	sudo ln -s $(drupal_dir) /var/www/$(www) && \
 	sudo chown -R www-data:www-data /var/www/$(www)
 
 dump-sql:
@@ -118,22 +125,22 @@ htaccess:
 enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access
 
 enable-bootstrap:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush dl -y bootstrap && \
 	drush en -y bootstrap && \
 	drush en -y obiba_bootstrap
 
 enable-mica:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush en -y obiba_mica
 
 enable-angular-app:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	rm -rf sites/all/libraries/angular-app  && \
 	drush angular-app
 
 enable-data-access:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush en -y obiba_mica_data_access_request
 
 #
@@ -143,31 +150,31 @@ enable-data-access:
 setup-dependencies: jquery_update datatables obiba-progressbar obiba-timeline
 
 chart-enable:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush highcharts-download && \
 	drush en -y charts_highcharts
 
 jquery_update:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush vset -y --format=string jquery_update_jquery_version 1.10 && \
 	drush vset -y --format=string jquery_update_jquery_admin_version 1.10
 
 datatables: datatables-download datatables-plugins-download
 
 datatables-download:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush datatables-download
 
 datatables-plugins-download:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush datatables-plugins-download
 
 obiba-progressbar:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush obiba-progressbar-download $(obiba-progressbar-version)
 
 obiba-timeline:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush mica-study-timeline-download $(obiba-timeline-version)
 
 #
@@ -175,7 +182,7 @@ obiba-timeline:
 #
 
 enable-autologout:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush dl -y autologout && \
 	drush en -y autologout && \
 	drush vset -y autologout_redirect_url "<front>" && \
@@ -190,12 +197,12 @@ less-css:
 	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css
 
 devel:
-	cd target/drupal && \
+	cd $(drupal_dir) && \
 	drush dl -y devel && \
 	drush en -y devel
 
 cc:
-	cd target/drupal && drush cc all && \
+	cd $(drupal_dir) && drush cc all && \
 	sudo chown -R www-data:www-data .
 
 
@@ -207,5 +214,5 @@ cc:
 github-install = cd /tmp && rm -f $(2).zip && rm -rf $(1)-$(2) && \
 	  wget -q https://github.com/obiba/$(1)/archive/$(2).zip && \
 	  unzip -q $(2).zip && \
-	  mv $(1)-$(2) $(CURDIR)/target/drupal/sites/all/$(3)/$(4) && \
+	  mv $(1)-$(2) $(drupal_dir)/sites/all/$(3)/$(4) && \
 	  rm -f $(2).zip
