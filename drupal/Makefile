@@ -107,7 +107,9 @@ dump-sql:
 create-sql:
 	mysql -h $(db_host) -u $(db_user) --password=$(db_pass) -e "drop database if exists $(db_name); create database $(db_name);"
 
-import-sql: create-sql
+import-sql: create-sql import-sql-tables
+
+import-sql-tables:
 	mysql -h $(db_host) -u $(db_user) --password=$(db_pass) $(db_name) < "drupal/drupal-$(drupal_version).sql"
 
 finalize-drupal: settings htaccess
