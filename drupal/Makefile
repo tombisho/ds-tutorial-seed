@@ -1,7 +1,7 @@
 #
 # Drupal
 #
-drupal_version = 7.39
+drupal_version = 7.41
 obiba-progressbar-version=1.0.0
 obiba-timeline-version=1.0
 drupal_dir=$(CURDIR)/target/drupal
@@ -22,10 +22,9 @@ www=html/drupal
 #
 # Release tags
 #
-mica-drupal7_version=7.x-1.1.1
-agate-drupal7_version=7.x-1.0.1
-protobuf-drupal7_version=7.x-1.0.0
-bootstrap-drupal7_version=7.x-1.0.4
+mica-drupal7_version=7.x-1.2
+agate-drupal7_version=7.x-1.2
+bootstrap-drupal7_version=7.x-1.2
 
 
 drupal-help:
@@ -67,8 +66,7 @@ prepare-drupal: prepare-install-drupal prepare-drupal-modules
 prepare-drupal-modules:
 	ln -s $(CURDIR)/../mica-drupal7 $(drupal_dir)/sites/all/modules/obiba_mica && \
 	ln -s $(CURDIR)/../bootstrap-drupal7 $(drupal_dir)/sites/all/themes/obiba_bootstrap && \
-	ln -s $(CURDIR)/../agate-drupal7 $(drupal_dir)/sites/all/modules/obiba_agate && \
-	ln -s $(CURDIR)/../protobuf-drupal7  $(drupal_dir)/sites/all/modules/obiba_protobuf
+	ln -s $(CURDIR)/../agate-drupal7 $(drupal_dir)/sites/all/modules/obiba_agate
 
 # Snapshot (docker for nigthly)
 setup-drupal-snapshot: prepare-drupal-snapshot www import-sql finalize-drupal
@@ -78,7 +76,6 @@ prepare-drupal-snapshot: prepare-install-drupal prepare-drupal-modules-snapshot
 prepare-drupal-modules-snapshot:
 	$(call github-install,mica-drupal7,master,modules,obiba_mica)
 	$(call github-install,agate-drupal7,master,modules,obiba_agate)
-	$(call github-install,protobuf-drupal7,master,modules,obiba_protobuf)
 	$(call github-install,bootstrap-drupal7,master,themes,obiba_bootstrap)
 
 # Release (for demo)
@@ -89,7 +86,6 @@ prepare-drupal-release: prepare-install-drupal prepare-drupal-modules-release
 prepare-drupal-modules-release:
 	$(call github-install,mica-drupal7,$(mica-drupal7_version),modules,obiba_mica)
 	$(call github-install,agate-drupal7,$(agate-drupal7_version),modules,obiba_agate)
-	$(call github-install,protobuf-drupal7,$(protobuf-drupal7_version),modules,obiba_protobuf)
 	$(call github-install,bootstrap-drupal7,$(bootstrap-drupal7_version),themes,obiba_bootstrap)
 
 prepare-install-drupal:
