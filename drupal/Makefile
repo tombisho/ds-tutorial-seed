@@ -191,21 +191,11 @@ enable-autologout:
 #
 
 less-css:
-	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css
-	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css
-
-enable-maelstrom:
-	ln -s $(CURDIR)/../maelstrom_bootstrap $(drupal_dir)/sites/all/themes/maelstrom_bootstrap && \
-	cd $(drupal_dir) && \
-	drush vset -y --format=string theme_default maelstrom_bootstrap
-
-enable-cptp:
-	ln -s $(CURDIR)/../cptp_bootstrap $(drupal_dir)/sites/all/themes/cptp_bootstrap && \
-	cd $(drupal_dir) && \
-	drush vset -y --format=string theme_default cptp_bootstrap
+	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/style.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
+	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/obiba.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
 
 enable-obiba:
-	ln -s $(CURDIR)/../obiba_bootstrap $(drupal_dir)/sites/all/themes/maelstobiba_bootstraprom_bootstrap && \
+	ln -s $(CURDIR)/../obiba_bootstrap $(drupal_dir)/sites/all/themes/obiba_bootstrap && \
 	cd $(drupal_dir) && \
 	drush vset -y --format=string theme_default obiba_bootstrap
 
