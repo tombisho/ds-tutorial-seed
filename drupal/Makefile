@@ -194,6 +194,21 @@ less-css:
 	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css
 	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css
 
+enable-maelstrom:
+	ln -s $(CURDIR)/../maelstrom_bootstrap $(drupal_dir)/sites/all/themes/maelstrom_bootstrap && \
+	cd $(drupal_dir) && \
+	drush vset -y --format=string theme_default maelstrom_bootstrap
+
+enable-cptp:
+	ln -s $(CURDIR)/../cptp_bootstrap $(drupal_dir)/sites/all/themes/cptp_bootstrap && \
+	cd $(drupal_dir) && \
+	drush vset -y --format=string theme_default cptp_bootstrap
+
+enable-obiba:
+	ln -s $(CURDIR)/../obiba_bootstrap $(drupal_dir)/sites/all/themes/maelstobiba_bootstraprom_bootstrap && \
+	cd $(drupal_dir) && \
+	drush vset -y --format=string theme_default obiba_bootstrap
+
 devel:
 	cd $(drupal_dir) && \
 	drush dl -y devel && \
