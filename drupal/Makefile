@@ -191,8 +191,13 @@ enable-autologout:
 #
 
 less-css:
-	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css
-	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css
+	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/style.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
+	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/obiba.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
+
+enable-obiba:
+	ln -s $(CURDIR)/../obiba_bootstrap $(drupal_dir)/sites/all/themes/obiba_bootstrap && \
+	cd $(drupal_dir) && \
+	drush vset -y --format=string theme_default obiba_bootstrap
 
 devel:
 	cd $(drupal_dir) && \
