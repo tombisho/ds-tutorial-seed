@@ -39,8 +39,8 @@ drupal-help:
 # Install drupal with mica/agate related modules for development
 drupal: drupal-clean setup-drupal enable-modules setup-dependencies cc
 
-# Install drupal with mica/agate related modules from their release tags
-drupal-release: drupal-clean setup-drupal-release enable-modules setup-dependencies cc
+# Install drupal with mica/agate related modules for production
+drupal-release: drupal-clean setup-drupal enable-modules-release cc
 
 # Install drupal with mica/agate related modules from master branches
 drupal-snapshot: drupal-clean setup-drupal-snapshot
@@ -78,16 +78,6 @@ prepare-drupal-modules-snapshot:
 	$(call github-install,agate-drupal7,master,modules,obiba_agate)
 	$(call github-install,bootstrap-drupal7,master,themes,obiba_bootstrap)
 
-# Release (for demo)
-setup-drupal-release: prepare-drupal-release www import-sql finalize-drupal
-
-prepare-drupal-release: prepare-install-drupal prepare-drupal-modules-release
-
-prepare-drupal-modules-release:
-	$(call github-install,mica-drupal7,$(mica-drupal7_version),modules,obiba_mica)
-	$(call github-install,agate-drupal7,$(agate-drupal7_version),modules,obiba_agate)
-	$(call github-install,bootstrap-drupal7,$(bootstrap-drupal7_version),themes,obiba_bootstrap)
-
 prepare-install-drupal:
 	drush make --prepare-install drupal/drupal-basic.make $(drupal_dir) && \
 	chmod -R a+w $(drupal_dir)
@@ -122,6 +112,9 @@ htaccess:
 
 enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access
 
+# Enabled modules for a production environment
+enable-modules-release: enable-bootstrap enable-mica enable-data-access download-dependencies jquery_update
+
 enable-bootstrap:
 	cd $(drupal_dir) && \
 	drush dl -y bootstrap && \
@@ -141,9 +134,22 @@ enable-data-access:
 	cd $(drupal_dir) && \
 	drush en -y obiba_mica_data_access_request
 
+deploy-dependencies:
+	rm -rf /tmp/mica-drupal-js-libraries && \
+	git clone git@github.com:obiba/mica-drupal-js-libraries.git /tmp/mica-drupal-js-libraries && \
+	cd /tmp/mica-drupal-js-libraries && \
+	cp -r $(drupal_dir)/sites/all/libraries/* . && \
+	git add . && \
+	(git commit -a -m "Deploying the JavaScript libraries" && git push origin master) || \
+	echo "Deployment completed."
+
 #
 # Dependencies
 #
+
+download-dependencies:
+	cd $(drupal_dir) && \
+	drush download-dependencies
 
 setup-dependencies: jquery_update datatables obiba-progressbar obiba-timeline
 
