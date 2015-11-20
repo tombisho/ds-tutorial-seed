@@ -220,8 +220,7 @@ cc:
 #
 
 # Install a module/them from a github repository given a tag or a branch name
-github-install = cd /tmp && rm -f $(2).zip && rm -rf $(1)-$(2) && \
-	  wget -q https://github.com/obiba/$(1)/archive/$(2).zip && \
-	  unzip -q $(2).zip && \
-	  mv $(1)-$(2) $(drupal_dir)/sites/all/$(3)/$(4) && \
-	  rm -f $(2).zip
+github-install = cd /tmp && rm -rf $(1)-$(2) && \
+	  curl -Ls https://github.com/obiba/$(1)/archive/$(2).tar.gz  | tar -xzf - && \
+	  rm -rf $(drupal_dir)/sites/all/$(3)/$(4) && \
+	  mv $(1)-$(2) $(drupal_dir)/sites/all/$(3)/$(4)
