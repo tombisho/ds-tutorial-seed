@@ -149,7 +149,7 @@ deploy-dependencies:
 
 download-dependencies:
 	cd $(drupal_dir) && \
-	drush download-dependencies
+	drush download-mica-dependencies
 
 setup-dependencies: jquery_update datatables obiba-progressbar obiba-timeline
 
