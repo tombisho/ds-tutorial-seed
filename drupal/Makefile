@@ -22,7 +22,7 @@ www=html/drupal
 #
 # Release tags
 #
-mica-drupal7_version=7.x-1.2
+mica-drupal7_version=7.x-1.4
 agate-drupal7_version=7.x-1.2
 bootstrap-drupal7_version=7.x-1.2
 
@@ -110,10 +110,14 @@ htaccess:
 # Mica related Modules
 #
 
-enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access
+enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access enable-charts-google
 
 # Enabled modules for a production environment
-enable-modules-release: enable-bootstrap enable-mica enable-data-access download-dependencies jquery_update
+enable-modules-release: enable-bootstrap enable-mica enable-data-access enable-charts-google download-dependencies jquery_update
+
+enable-charts-google:
+	cd $(drupal_dir) && \
+	drush en -y charts_google
 
 enable-bootstrap:
 	cd $(drupal_dir) && \
@@ -126,9 +130,12 @@ enable-mica:
 	drush en -y obiba_mica
 
 enable-angular-app:
-	cd $(drupal_dir) && \
-	rm -rf sites/all/libraries/angular-app  && \
-	drush angular-app
+	cd $(drupal_dir)/sites/all/modules/obiba_mica && \
+	bower --allow-root install && \
+	rm -rf $(drupal_dir)/sites/all/libraries/angular-app && \
+	mkdir $(drupal_dir)/sites/all/libraries/angular-app && \
+	mv bower_components/* $(drupal_dir)/sites/all/libraries/angular-app/ && \
+	rm -rf  bower_components
 
 enable-data-access:
 	cd $(drupal_dir) && \

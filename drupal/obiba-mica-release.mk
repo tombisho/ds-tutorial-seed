@@ -1,6 +1,6 @@
 mica_branch_version=1.x
 drupal_branch_version=7.x
-tag_mica_version=1.3
+tag_mica_version=1.4
 branch=$(drupal_branch_version)-$(mica_branch_version)
 version_mica=$(drupal_branch_version)-$(tag_mica_version)
 
