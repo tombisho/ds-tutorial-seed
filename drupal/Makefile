@@ -143,9 +143,11 @@ enable-data-access:
 
 deploy-dependencies:
 	rm -rf /tmp/mica-drupal-js-libraries && \
-	git clone git@github.com:obiba/mica-drupal-js-libraries.git /tmp/mica-drupal-js-libraries && \
+	git clone https://github.com/obiba/mica-drupal-js-libraries.git /tmp/mica-drupal-js-libraries && \
 	cd /tmp/mica-drupal-js-libraries && \
+	(ls -d */ | xargs git rm -r) && \
 	cp -r $(drupal_dir)/sites/all/libraries/* . && \
+	rm -f README.txt && \
 	git add . && \
 	(git commit -a -m "Deploying the JavaScript libraries" && git push origin master) || \
 	echo "Deployment completed."
