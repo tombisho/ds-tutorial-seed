@@ -22,8 +22,8 @@ www=html/drupal
 #
 # Release tags
 #
-mica-drupal7_version=7.x-1.6
-agate-drupal7_version=7.x-1.2
+mica-drupal7_version=7.x-1.7
+agate-drupal7_version=7.x-1.3
 bootstrap-drupal7_version=7.x-1.2
 
 
