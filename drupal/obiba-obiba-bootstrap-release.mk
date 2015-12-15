@@ -1,6 +1,6 @@
 mica_branch_version=1.x
 drupal_branch_version=7.x
-tag_bootstrap_version=1.2
+tag_bootstrap_version=1.3
 branch=$(drupal_branch_version)-$(mica_branch_version)
 version_obiba_bootstrap=$(drupal_branch_version)-$(tag_bootstrap_version)
 
