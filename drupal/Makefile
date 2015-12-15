@@ -40,7 +40,7 @@ drupal-help:
 drupal: drupal-clean setup-drupal enable-modules setup-dependencies cc
 
 # Install drupal with mica/agate related modules for production
-drupal-release: drupal-clean setup-drupal enable-modules-release cc
+drupal-release: drupal-clean setup-drupal-release enable-modules-release cc
 
 # Install drupal with mica/agate related modules from master branches
 drupal-snapshot: drupal-clean setup-drupal-snapshot
@@ -67,6 +67,9 @@ prepare-drupal-modules:
 	ln -s $(CURDIR)/../mica-drupal7 $(drupal_dir)/sites/all/modules/obiba_mica && \
 	ln -s $(CURDIR)/../bootstrap-drupal7 $(drupal_dir)/sites/all/themes/obiba_bootstrap && \
 	ln -s $(CURDIR)/../agate-drupal7 $(drupal_dir)/sites/all/modules/obiba_agate
+
+# Release
+setup-drupal-release: prepare-install-drupal www import-sql finalize-drupal
 
 # Snapshot (docker for nigthly)
 setup-drupal-snapshot: prepare-drupal-snapshot www import-sql finalize-drupal
