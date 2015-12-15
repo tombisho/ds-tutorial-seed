@@ -24,7 +24,7 @@ www=html/drupal
 #
 mica-drupal7_version=7.x-1.7
 agate-drupal7_version=7.x-1.3
-bootstrap-drupal7_version=7.x-1.2
+bootstrap-drupal7_version=7.x-1.3
 
 
 drupal-help:
