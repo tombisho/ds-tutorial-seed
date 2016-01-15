@@ -40,7 +40,7 @@ drupal-help:
 drupal: drupal-clean setup-drupal enable-modules setup-dependencies cc
 
 # Install drupal with mica/agate related modules for production
-drupal-release: drupal-clean setup-drupal-release enable-modules-release cc
+drupal-release: drupal-clean setup-drupal-release enable-modules-release-branch cc
 
 # Install drupal with mica/agate related modules from master branches
 drupal-snapshot: drupal-clean setup-drupal-snapshot
@@ -116,7 +116,8 @@ htaccess:
 enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access enable-charts-google
 
 # Enabled modules for a production environment
-enable-modules-release: enable-bootstrap enable-mica enable-data-access enable-charts-google download-dependencies jquery_update
+enable-modules-release: enable-bootstrap enable-mica enable-data-access enable-charts-google download-dependencies-snapshot jquery_update
+enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access enable-charts-google download-dependencies jquery_update
 
 enable-charts-google:
 	cd $(drupal_dir) && \
@@ -162,6 +163,10 @@ deploy-dependencies:
 download-dependencies:
 	cd $(drupal_dir) && \
 	drush download-mica-dependencies
+
+download-dependencies-snapshot:
+	cd $(drupal_dir) && \
+	drush download-mica-dependencies '' master
 
 setup-dependencies: jquery_update datatables obiba-progressbar obiba-timeline
 
