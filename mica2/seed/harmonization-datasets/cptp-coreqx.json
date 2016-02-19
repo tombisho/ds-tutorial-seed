@@ -21,6 +21,7 @@
     "entityType": "Participant",
     "published": false,
     "obiba.mica.HarmonizationDatasetDto.type": {
+    	"networkId": "cptp",
         "project": "CPTP",
         "table": "Coreqx_final",
         "studyTables": [
