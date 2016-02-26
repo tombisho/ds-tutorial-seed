@@ -1,7 +1,7 @@
 #
 # Drupal
 #
-drupal_version = 7.41
+drupal_version = 7.43
 obiba-progressbar-version=1.0.0
 obiba-timeline-version=1.0
 drupal_dir=$(CURDIR)/target/drupal
@@ -222,7 +222,6 @@ enable-autologout:
 
 less-css:
 	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/style.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
-	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/obiba.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
 
 enable-obiba:
 	ln -s $(CURDIR)/../obiba_bootstrap $(drupal_dir)/sites/all/themes/obiba_bootstrap && \
