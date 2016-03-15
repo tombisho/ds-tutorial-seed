@@ -220,6 +220,8 @@ enable-autologout:
 # Development tools
 #
 
+install-devel: devel devel-patch enable-devel cc
+
 less-css:
 	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/style.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
 
@@ -230,7 +232,14 @@ enable-obiba:
 
 devel:
 	cd $(drupal_dir) && \
-	drush dl -y devel && \
+	drush dl -y devel
+
+devel-patch:
+	cd $(drupal_dir) && \
+	drush iq-apply-patch 2559061
+
+enable-devel:
+	cd $(drupal_dir) && \
 	drush en -y devel
 
 cc:
