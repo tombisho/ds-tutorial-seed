@@ -115,7 +115,7 @@ htaccess:
 
 enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access enable-charts-google
 
-# Enabled modules for a Nightly environment
+# Enabled modules for a snapshot environment
 enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies-snapshot jquery_update
 
 # Enabled modules for a production environment
@@ -172,8 +172,7 @@ download-dependencies:
 
 download-dependencies-snapshot:
 	cd $(drupal_dir) && \
-	drush download-mica-dependencies '' master && \
-	echo '$$base_url = "https://nightly.obiba.org";' >> sites/default/settings.php
+	drush download-mica-dependencies '' master
 
 setup-dependencies: jquery_update datatables obiba-progressbar obiba-timeline
 
