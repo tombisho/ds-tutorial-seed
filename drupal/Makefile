@@ -4,6 +4,8 @@
 drupal_version = 7.43
 obiba-progressbar-version=1.0.0
 obiba-timeline-version=1.0
+mica_dependencies_release_version=1.1.0
+mica_dependencies_dev_version=master
 drupal_dir=$(CURDIR)/target/drupal
 
 #
@@ -168,11 +170,11 @@ deploy-dependencies:
 
 download-dependencies:
 	cd $(drupal_dir) && \
-	drush download-mica-dependencies
+	drush download-mica-dependencies '' $(mica_dependencies_release_version)
 
 download-dependencies-snapshot:
 	cd $(drupal_dir) && \
-	drush download-mica-dependencies '' master
+	drush download-mica-dependencies '' $(mica_dependencies_dev_version)
 
 setup-dependencies: jquery_update datatables obiba-progressbar obiba-timeline
 
@@ -222,6 +224,7 @@ enable-autologout:
 install-devel: devel devel-patch enable-devel cc
 
 less-css:
+	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/obiba-commun.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
 	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/style.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
 
 enable-obiba:
