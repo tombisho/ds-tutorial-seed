@@ -4,7 +4,6 @@
 drupal_version = 7.43
 obiba-progressbar-version=1.0.0
 obiba-timeline-version=1.0
-mica_dependencies_release_version=1.1.0
 mica_dependencies_dev_version=master
 drupal_dir=$(CURDIR)/target/drupal
 
@@ -24,9 +23,9 @@ www=html/drupal
 #
 # Release tags
 #
-mica-drupal7_version=7.x-1.9
-agate-drupal7_version=7.x-1.3
-bootstrap-drupal7_version=7.x-1.3
+mica-drupal7_version=7.x-2.2
+agate-drupal7_version=7.x-1.4
+bootstrap-drupal7_version=7.x-1.4
 
 
 drupal-help:
@@ -36,6 +35,7 @@ drupal-help:
 	@echo "Available make targets:"
 	@echo "  drupal         : Clean & setup Drupal with a symlink to Mica modules/themes in target directory and import drupal.sql"
 	@echo "  drupal-release : Clean & setup Drupal with released Mica modules/themes in target directory and import drupal.sql"
+	@echo "  less-css-target : Compile less of specific project exp : less-css-target project=bootstrap-drupal7"
 	@echo
 
 # Install drupal with mica/agate related modules for development
@@ -118,7 +118,7 @@ htaccess:
 enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access enable-charts-google
 
 # Enabled modules for a snapshot environment
-enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies-snapshot jquery_update
+enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies-snapshot datatables-download datatables-plugins-download jquery_update
 
 # Enabled modules for a production environment
 enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access enable-charts-google download-dependencies jquery_update
@@ -170,7 +170,7 @@ deploy-dependencies:
 
 download-dependencies:
 	cd $(drupal_dir) && \
-	drush download-mica-dependencies '' $(mica_dependencies_release_version)
+	drush download-mica-dependencies
 
 download-dependencies-snapshot:
 	cd $(drupal_dir) && \
@@ -226,6 +226,12 @@ install-devel: devel devel-patch enable-devel cc
 less-css:
 	lessc $(CURDIR)/../bootstrap-drupal7/less/obiba.less $(CURDIR)/../bootstrap-drupal7/css/obiba.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/obiba-commun.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
 	lessc $(CURDIR)/../bootstrap-drupal7/less/style.less $(CURDIR)/../bootstrap-drupal7/css/style.css --source-map=$(CURDIR)/../bootstrap-drupal7/css/style.css.map --source-map-basepath=$(CURDIR)/../bootstrap-drupal7/css
+
+less-css-target:
+	$(call less-css-project,$(project))
+
+less-css-project = lessc $(CURDIR)/../$(1)/less/obiba.less $(CURDIR)/../$(1)/css/obiba.css && \
+	lessc $(CURDIR)/../$(1)/less/style.less $(CURDIR)/../$(1)/css/style.css
 
 enable-obiba:
 	ln -s $(CURDIR)/../obiba_bootstrap $(drupal_dir)/sites/all/themes/obiba_bootstrap && \

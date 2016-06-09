@@ -1,8 +1,8 @@
-mica_branch_version=1.x
-drupal_branch_version=7.x
-tag_bootstrap_version=1.3
-branch=$(drupal_branch_version)-$(mica_branch_version)
-version_obiba_bootstrap=$(drupal_branch_version)-$(tag_bootstrap_version)
+bootstrap_mica_branch_version=1.x
+bootstrap_drupal_branch_version=7.x
+bootstrap_tag_bootstrap_version=1.4
+bootstrap_branch=$(bootstrap_drupal_branch_version)-$(bootstrap_mica_bootstrap_branch_version)
+bootstrap_version_obiba_bootstrap=$(bootstrap_drupal_branch_version)-$(bootstrap_tag_bootstrap_version)
 
 #drupal.org repositories :
 drupal_org_obiba_bootstrap-drupal7=git.drupal.org:project/obiba_bootstrap.git
@@ -19,4 +19,4 @@ git_drupal=target/git_drupal_repo
 #
 
 release-obiba-bootstrap :
-	$(call release-drupal-module,$(branch),$(drupal_org_obiba_bootstrap-drupal7),$(version_obiba_bootstrap),$(gitHub_obiba_bootstrap-drupal7),bootstrap-drupal7,obiba_bootstrap)
+	$(call release-drupal-module,$(bootstrap_branch),$(bootstrap_drupal_org_obiba_bootstrap-drupal7),$(bootstrap_version_obiba_bootstrap),$(bootstrap_gitHub_obiba_bootstrap-drupal7),bootstrap_bootstrap-drupal7,bootstrap_obiba_bootstrap)
