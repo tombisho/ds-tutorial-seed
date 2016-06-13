@@ -118,7 +118,7 @@ htaccess:
 enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access enable-charts-google
 
 # Enabled modules for a snapshot environment
-enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies-snapshot datatables-download datatables-plugins-download jquery_update
+enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies-snapshot jquery_update
 
 # Enabled modules for a production environment
 enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access enable-charts-google download-dependencies jquery_update
