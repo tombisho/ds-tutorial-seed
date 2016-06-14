@@ -153,16 +153,13 @@ enable-graphics:
 	cd $(drupal_dir) && \
 	drush en -y obiba_mica_graphic
 
-deploy-dependencies:
-	rm -rf /tmp/mica-drupal-js-libraries && \
-	git clone https://github.com/obiba/mica-drupal-js-libraries.git /tmp/mica-drupal-js-libraries && \
-	cd /tmp/mica-drupal-js-libraries && \
-	(ls -d */ | xargs git rm -r) && \
-	cp -r $(drupal_dir)/sites/all/libraries/* . && \
-	rm -f README.txt && \
-	git add . && \
-	(git commit -a -m "Deploying the JavaScript libraries" && git push origin master) || \
-	echo "Deployment completed."
+deploy-dependencies: deploy-dependencies-master
+
+deploy-dependencies-master:
+	$(call deploy-js-libraries-by-branch,master)
+
+deploy-dependencies-branch:
+	$(call deploy-js-libraries-by-branch,branch-1.1.x)
 
 #
 # Dependencies
@@ -264,3 +261,15 @@ github-install = cd /tmp && rm -rf $(1)-$(2) && \
 	  curl -Ls https://github.com/obiba/$(1)/archive/$(2).tar.gz  | tar -xzf - && \
 	  rm -rf $(drupal_dir)/sites/all/$(3)/$(4) && \
 	  mv $(1)-$(2) $(drupal_dir)/sites/all/$(3)/$(4)
+
+# Deploy Mica-Drupal JS Libraries dependencies
+deploy-js-libraries-by-branch = rm -rf /tmp/mica-drupal-js-libraries && \
+	git clone https://github.com/obiba/mica-drupal-js-libraries.git /tmp/mica-drupal-js-libraries && \
+	cd /tmp/mica-drupal-js-libraries && \
+	git checkout $(1) && \
+	(ls -d */ | xargs git rm -r) && \
+	cp -r $(drupal_dir)/sites/all/libraries/* . && \
+	rm -f README.txt && \
+	git add . && \
+	(git commit -a -m "Deploying the JavaScript libraries" && git push origin $(1)) || \
+	echo "Deployment to $(1) completed."
