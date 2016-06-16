@@ -1,7 +1,7 @@
 #
 # Drupal
 #
-drupal_version = 7.43
+drupal_version = 7.44
 obiba-progressbar-version=1.0.0
 obiba-timeline-version=1.0
 mica_dependencies_dev_version=master
