@@ -147,7 +147,8 @@ enable-angular-app:
 
 enable-data-access:
 	cd $(drupal_dir) && \
-	drush en -y obiba_mica_data_access_request
+	drush en -y obiba_mica_data_access_request && \
+	drush en -y obiba_mica_research_project
 
 enable-graphics:
 	cd $(drupal_dir) && \
