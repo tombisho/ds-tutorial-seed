@@ -59,6 +59,9 @@ seed-index:
 	$(call table-index,CPTP,TTP_UHLQ_coreqx)
 
 seed-taxonomies:
+	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?user=maelstrom-research&repo=maelstrom-taxonomies&override=false&ref=1.0"
+
+seed-taxonomies-latest:
 	$(call taxonomy-import,AreaOfInformation)
 	$(call taxonomy-import,Harmonization)
 	$(call taxonomy-import,AdditionalInformation)
