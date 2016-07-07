@@ -4,6 +4,7 @@
 opal_url=https://localhost:8443
 username=administrator
 password=password
+taxonomies_ref=1.0
 
 # Database name in opal
 database=opal_data
@@ -59,7 +60,7 @@ seed-index:
 	$(call table-index,CPTP,TTP_UHLQ_coreqx)
 
 seed-taxonomies:
-	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?user=maelstrom-research&repo=maelstrom-taxonomies&override=false&ref=1.0"
+	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?user=maelstrom-research&repo=maelstrom-taxonomies&override=true&ref=$(taxonomies_ref)"
 
 seed-taxonomies-latest:
 	$(call taxonomy-import,AreaOfInformation)
