@@ -118,10 +118,10 @@ htaccess:
 enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access enable-charts-google
 
 # Enabled modules for a snapshot environment
-enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies-snapshot jquery_update
+enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-research-project enable-graphics enable-charts-google download-dependencies-snapshot jquery_update
 
 # Enabled modules for a production environment
-enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access enable-charts-google download-dependencies jquery_update
+enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies jquery_update
 
 enable-charts-google:
 	cd $(drupal_dir) && \
@@ -147,7 +147,10 @@ enable-angular-app:
 
 enable-data-access:
 	cd $(drupal_dir) && \
-	drush en -y obiba_mica_data_access_request && \
+	drush en -y obiba_mica_data_access_request
+
+enable-research-project:
+	cd $(drupal_dir) && \
 	drush en -y obiba_mica_research_project
 
 enable-graphics:
