@@ -1,7 +1,7 @@
 #
 # Drupal
 #
-drupal_version = 7.44
+drupal_version = 7.50
 obiba-progressbar-version=1.0.0
 obiba-timeline-version=1.0
 mica_dependencies_dev_version=master
@@ -23,9 +23,9 @@ www=html/drupal
 #
 # Release tags
 #
-mica-drupal7_version=7.x-2.3
-agate-drupal7_version=7.x-1.4
-bootstrap-drupal7_version=7.x-1.4
+#mica-drupal7_version=7.x-3.0
+#agate-drupal7_version=7.x-1.5
+#bootstrap-drupal7_version=7.x-3.0
 
 
 drupal-help:
@@ -231,7 +231,7 @@ less-css-target:
 	$(call less-css-project,$(project))
 
 less-css-project = lessc $(CURDIR)/../$(1)/less/obiba.less $(CURDIR)/../$(1)/css/obiba.css && \
-	lessc $(CURDIR)/../$(1)/less/style.less $(CURDIR)/../$(1)/css/style.css
+	lessc $(CURDIR)/../$(1)/less/style.less $(CURDIR)/../$(1)/css/custom.css
 
 enable-obiba:
 	ln -s $(CURDIR)/../obiba_bootstrap $(drupal_dir)/sites/all/themes/obiba_bootstrap && \
