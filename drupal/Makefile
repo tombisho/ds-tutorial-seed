@@ -115,7 +115,7 @@ htaccess:
 # Mica related Modules
 #
 
-enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access enable-charts-google
+enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access enable-research-project enable-charts-google
 
 # Enabled modules for a snapshot environment
 enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-research-project enable-graphics enable-charts-google download-dependencies-snapshot jquery_update
