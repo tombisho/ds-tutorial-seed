@@ -163,7 +163,7 @@ deploy-dependencies-master:
 	$(call deploy-js-libraries-by-branch,master)
 
 deploy-dependencies-branch:
-	$(call deploy-js-libraries-by-branch,branch-1.2.x)
+	$(call deploy-js-libraries-by-branch,branch-1.3.x)
 
 #
 # Dependencies
