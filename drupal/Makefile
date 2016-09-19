@@ -21,11 +21,12 @@ db_host = localhost
 www=html/drupal
 
 #
-# Release tags
+# Release branch
 #
-#mica-drupal7_version=7.x-3.1
-#agate-drupal7_version=7.x-1.5
-#bootstrap-drupal7_version=7.x-3.0
+mica-drupal7_branch=7.x-4.x
+agate-drupal7_branch=7.x-4.x
+bootstrap-drupal7_branch=7.x-4.x
+mica_dependencies_branch=branch-1.3.x
 
 
 drupal-help:
@@ -46,6 +47,9 @@ drupal-release: drupal-clean setup-drupal-release enable-modules-release-branch 
 
 # Install drupal with mica/agate related modules from master branches
 drupal-snapshot: drupal-clean setup-drupal-snapshot
+
+# Install drupal with mica/agate related modules from master branches
+drupal-branch-snapshot: drupal-clean setup-drupal-branch-snapshot
 
 # Prepare drupal installation, for making a clean reference SQL database
 drupal-empty: drupal-clean setup-drupal-empty
@@ -76,12 +80,21 @@ setup-drupal-release: prepare-install-drupal www import-sql finalize-drupal
 # Snapshot (docker for nigthly)
 setup-drupal-snapshot: prepare-drupal-snapshot www import-sql finalize-drupal
 
+setup-drupal-branch-snapshot: prepare-drupal-branch-snapshot www import-sql finalize-drupal
+
 prepare-drupal-snapshot: prepare-install-drupal prepare-drupal-modules-snapshot
+
+prepare-drupal-branch-snapshot: prepare-install-drupal prepare-drupal-modules-branch-snapshot
 
 prepare-drupal-modules-snapshot:
 	$(call github-install,mica-drupal7,master,modules,obiba_mica)
 	$(call github-install,agate-drupal7,master,modules,obiba_agate)
 	$(call github-install,bootstrap-drupal7,master,themes,obiba_bootstrap)
+
+prepare-drupal-modules-branch-snapshot:
+	$(call github-install,mica-drupal7,$(mica-drupal7_branch),modules,obiba_mica)
+	$(call github-install,agate-drupal7,$(agate-drupal7_branch),modules,obiba_agate)
+	$(call github-install,bootstrap-drupal7,$(bootstrap-drupal7_branch),themes,obiba_bootstrap)
 
 prepare-install-drupal:
 	drush make --prepare-install drupal/drupal-basic.make $(drupal_dir) && \
@@ -119,6 +132,8 @@ enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-acce
 
 # Enabled modules for a snapshot environment
 enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-research-project enable-graphics enable-charts-google download-dependencies-snapshot jquery_update
+
+enable-modules-branch-snapshot: enable-bootstrap enable-mica enable-data-access enable-research-project enable-graphics enable-charts-google download-dependencies-branch-snapshot jquery_update
 
 # Enabled modules for a production environment
 enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies jquery_update
@@ -175,7 +190,11 @@ download-dependencies:
 
 download-dependencies-snapshot:
 	cd $(drupal_dir) && \
-	drush download-mica-dependencies '' $(mica_dependencies_dev_version)
+	drush download-mica-dependencies '' master
+
+download-dependencies-branch-snapshot:
+	cd $(drupal_dir) && \
+	drush download-mica-dependencies '' $(mica_dependencies_branch)
 
 setup-dependencies: jquery_update datatables obiba-progressbar obiba-timeline
 
