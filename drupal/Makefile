@@ -38,10 +38,10 @@ drupal-help:
 	@echo
 
 # Install drupal with mica/agate related modules for development
-drupal: drupal-clean setup-drupal enable-modules setup-dependencies cc
+drupal: drupal-clean setup-drupal enable-modules setup-dependencies update-composer-autoload cc
 
 # Install drupal with mica/agate related modules for production
-drupal-release: drupal-clean setup-drupal-release enable-modules-release-branch cc
+drupal-release: drupal-clean setup-drupal-release enable-modules-release-branch update-composer-autoload cc
 
 # Install drupal with mica/agate related modules from snapshot
 drupal-snapshot: drupal-clean setup-drupal-snapshot
@@ -57,10 +57,10 @@ drupal-clean:
 #
 
 # Empty
-setup-drupal-empty: prepare-drupal www create-sql
+setup-drupal-empty: prepare-drupal  create-sql www
 
 # Development
-setup-drupal: prepare-drupal www import-sql finalize-drupal
+setup-drupal: prepare-drupal  import-sql finalize-drupal www
 
 prepare-drupal: prepare-install-drupal prepare-drupal-modules
 
@@ -70,10 +70,10 @@ prepare-drupal-modules:
 	ln -s $(CURDIR)/../agate-drupal7 $(drupal_dir)/sites/all/modules/obiba_agate
 
 # Release
-setup-drupal-release: prepare-install-drupal www import-sql finalize-drupal
+setup-drupal-release: prepare-install-drupal import-sql finalize-drupal www
 
 # Snapshot (docker for nigthly)
-setup-drupal-snapshot: prepare-drupal-snapshot www import-sql finalize-drupal
+setup-drupal-snapshot: prepare-drupal-snapshot import-sql finalize-drupal www
 
 prepare-drupal-snapshot: prepare-install-drupal prepare-drupal-modules-snapshot
 
@@ -117,10 +117,10 @@ htaccess:
 enable-modules: enable-bootstrap enable-mica enable-angular-app enable-data-access enable-research-project enable-charts-google
 
 # Enabled modules for a snapshot environment
-enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-research-project enable-graphics enable-charts-google download-dependencies-snapshot jquery_update
+enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-research-project enable-graphics enable-charts-google download-dependencies-snapshot update-composer-autoload jquery_update
 
 # Enabled modules for a production environment
-enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies jquery_update
+enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies update-composer-autoload jquery_update
 
 enable-charts-google:
 	cd $(drupal_dir) && \
@@ -156,7 +156,7 @@ enable-graphics:
 	cd $(drupal_dir) && \
 	drush en -y obiba_mica_graphic
 
-deploy-dependencies: 
+deploy-dependencies:
 	$(call deploy-js-libraries-by-branch,$(mica_js_dependencies_branch))
 
 #
@@ -244,6 +244,9 @@ devel-patch:
 enable-devel:
 	cd $(drupal_dir) && \
 	drush en -y devel
+
+update-composer-autoload:
+	cd $(drupal_dir) && drush composer-manager dump-autoload -o && drush cc all
 
 cc:
 	cd $(drupal_dir) && drush cc all && \
