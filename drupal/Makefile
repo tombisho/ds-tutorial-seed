@@ -169,7 +169,7 @@ download-dependencies:
 
 download-dependencies-snapshot:
 	cd $(drupal_dir) && \
-	drush download-mica-dependencies '' $(mica_js_dependencies_branch)
+	drush download-mica-dependencies --repo=$(mica_js_dependencies_branch)
 
 setup-dependencies: jquery_update datatables obiba-progressbar obiba-timeline
 
