@@ -1,6 +1,6 @@
-agate_mica_branch_version=1.x
+agate_mica_branch_version=4.x
 agate_drupal_branch_version=7.x
-agate_tag_agate_version=1.6
+agate_tag_agate_version=4.0-rc1
 agate_branch=$(agate_drupal_branch_version)-$(agate_mica_branch_version)
 agate_version_agate=$(agate_drupal_branch_version)-$(agate_tag_agate_version)
 

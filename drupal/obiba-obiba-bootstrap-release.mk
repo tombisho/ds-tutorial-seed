@@ -1,6 +1,6 @@
-bootstrap_mica_branch_version=3.x
+bootstrap_mica_branch_version=4.x
 bootstrap_drupal_branch_version=7.x
-bootstrap_tag_bootstrap_version=3.0
+bootstrap_tag_bootstrap_version=4.0-rc1
 bootstrap_branch=$(bootstrap_drupal_branch_version)-$(bootstrap_mica_branch_version)
 bootstrap_version_obiba_bootstrap=$(bootstrap_drupal_branch_version)-$(bootstrap_tag_bootstrap_version)
 
