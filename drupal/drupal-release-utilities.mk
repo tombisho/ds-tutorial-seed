@@ -19,6 +19,7 @@ create-repo-drupal = mkdir -p $(1)
 tag-drupal-module = cd $(1) && \
 	$(call get-drupal-module,$(2),$(3),$(6)) && \
 	cd ../../ && \
+	rm -rf $(1)/$(6)/* &&\
 	cp -r $(4)/$(5)/* $(1)/$(6)/ &&\
 	cd $(1)/$(6)/ && \
 	git add . && \
