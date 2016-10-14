@@ -274,3 +274,9 @@ deploy-js-libraries-by-branch = rm -rf /tmp/mica-drupal-js-libraries && \
 	git add . && \
 	(git commit -a -m "Deploying the JavaScript libraries" && git push origin $(1)) || \
 	echo "Deployment to $(1) completed."
+
+update-composer:
+	cd $(drupal_dir) && \
+	drush composer-json-rebuild && \
+	cd sites/default/files/composer/ && \
+	composer dump-autoload -o
