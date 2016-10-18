@@ -1,7 +1,7 @@
 #
 # Drupal
 #
-drupal_version = 7.50
+drupal_version = 7.51
 obiba-progressbar-version=1.0.0
 obiba-timeline-version=1.0
 drupal_dir=$(CURDIR)/target/drupal
