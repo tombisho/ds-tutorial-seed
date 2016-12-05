@@ -112,17 +112,13 @@ htaccess:
 # Mica related Modules
 #
 
-enable-modules: enable-bootstrap enable-mica bower-prepare-drupal-libraries enable-angular-app download-lib-dependencies remove-bower-components jquery_update enable-data-access enable-research-project enable-charts-google
+enable-modules: enable-bootstrap enable-mica bower-prepare-drupal-libraries enable-angular-app download-lib-dependencies remove-bower-components jquery_update enable-data-access enable-research-project
 
 # Enabled modules for a snapshot environment
-enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-research-project enable-graphics enable-charts-google download-dependencies-snapshot update-composer-autoload jquery_update
+enable-modules-snapshot: enable-bootstrap enable-mica enable-data-access enable-research-project enable-graphics download-dependencies-snapshot update-composer-autoload jquery_update
 
 # Enabled modules for a production environment
-enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access enable-graphics enable-charts-google download-dependencies update-composer-autoload jquery_update
-
-enable-charts-google:
-	cd $(drupal_dir) && \
-	drush en -y charts_google
+enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access enable-graphics download-dependencies update-composer-autoload jquery_update
 
 enable-bootstrap:
 	cd $(drupal_dir) && \
@@ -177,11 +173,6 @@ download-dependencies-snapshot:
 	drush download-mica-dependencies --repo=$(mica_js_dependencies_branch)
 
 download-lib-dependencies: datatables-prepare obiba-progressbar obiba-timeline
-
-chart-enable:
-	cd $(drupal_dir) && \
-	drush highcharts-download && \
-	drush en -y charts_highcharts
 
 jquery_update:
 	cd $(drupal_dir) && \
