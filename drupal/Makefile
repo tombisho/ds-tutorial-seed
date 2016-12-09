@@ -172,7 +172,7 @@ download-dependencies-snapshot:
 	cd $(drupal_dir) && \
 	drush download-mica-dependencies --repo=$(mica_js_dependencies_branch)
 
-download-lib-dependencies: datatables-prepare obiba-progressbar obiba-timeline
+download-lib-dependencies: datatables-prepare obiba-progressbar obiba-timeline obiba-country-codes
 
 jquery_update:
 	cd $(drupal_dir) && \
@@ -186,6 +186,9 @@ datatables-prepare:
 
 obiba-progressbar:
 	cp -r $(drupal_dir)/sites/all/modules/obiba_mica/bower_components/obiba-progressbar $(drupal_dir)/sites/all/libraries/
+
+obiba-country-codes:
+	cp -r $(drupal_dir)/sites/all/modules/obiba_mica/bower_components/obiba-country-codes $(drupal_dir)/sites/all/libraries/
 
 obiba-timeline:
 	cp -r $(drupal_dir)/sites/all/modules/obiba_mica/bower_components/mica-study-timeline $(drupal_dir)/sites/all/libraries/ && \
