@@ -5,6 +5,7 @@ opal_url=https://localhost:8443
 username=administrator
 password=password
 taxonomies_ref=1.0
+taxonomies_key=xxx
 
 # Database name in opal
 database=opal_data
@@ -60,7 +61,7 @@ seed-index:
 	$(call table-index,CPTP,TTP_UHLQ_coreqx)
 
 seed-taxonomies:
-	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?user=maelstrom-research&repo=maelstrom-taxonomies&override=true&ref=$(taxonomies_ref)"
+	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?user=maelstrom-research&repo=maelstrom-taxonomies&override=true&ref=$(taxonomies_ref)&key=$(taxonomies_key)"
 
 seed-taxonomies-latest:
 	$(call taxonomy-import,AreaOfInformation)
@@ -80,6 +81,6 @@ tables-import = opal file -o $(opal_url) -u $(username) -p $(password) -up ./opa
 	opal import-xml -o $(opal_url) -u $(username) -p $(password) -pa /tmp/$(1).zip -d $(1) && \
 	while [ `opal rest -o $(opal_url) -u $(username) -p $(password) -m GET /shell/commands -j | grep -ch "NOT_STARTED\|IN_PROGRESS"` -gt 0 ] ; do echo -n "."; sleep 5; done; echo "."
 
-taxonomy-import = opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?repo=maelstrom-taxonomies&override=true&file=$(1).yml"
+taxonomy-import = opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?repo=maelstrom-taxonomies&key=$(taxonomies_key)&override=true&file=$(1).yml"
 
 table-index = opal rest -o $(opal_url) -u $(username) -p $(password) -m PUT "/datasource/$(1)/table/$(2)/index"
