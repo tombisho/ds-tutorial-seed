@@ -5,7 +5,7 @@ opal_url=https://localhost:8443
 username=administrator
 password=password
 taxonomies_ref=1.0
-taxonomies_key=xxx
+taxonomies_key=4929750633404868
 
 # Database name in opal
 database=opal_data
