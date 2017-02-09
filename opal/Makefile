@@ -60,6 +60,10 @@ seed-index:
 	$(call table-index,CPTP,TTP_CoreQA_coreqx)
 	$(call table-index,CPTP,TTP_UHLQ_coreqx)
 
+seed-datashield:
+	$(call project-create,datashield)
+	$(call tables-import,datashield)	
+
 seed-taxonomies:
 	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?user=maelstrom-research&repo=maelstrom-taxonomies&override=true&ref=$(taxonomies_ref)&key=$(taxonomies_key)"
 
