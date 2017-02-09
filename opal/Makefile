@@ -20,18 +20,18 @@ opal-help:
 seed-opal: seed-projects seed-tables seed-taxonomies
 
 seed-projects:
-	$(call project-create,CPTP)
-	$(call project-create,FNAC)
-	$(call project-create,CLS)
-	$(call project-create,CLSA)
-	$(call project-create,FRELE)
-	$(call project-create,HELIAD)
-	$(call project-create,LASA)
-	$(call project-create,LBLS)
-	$(call project-create,NuAge)
-	$(call project-create,PATH)
-	$(call project-create,SHIP)
-	$(call project-create,ULSAM)
+	$(call project-create,CPTP,Mica)
+	$(call project-create,FNAC,Mica)
+	$(call project-create,CLS,Mica)
+	$(call project-create,CLSA,Mica)
+	$(call project-create,FRELE,Mica)
+	$(call project-create,HELIAD,Mica)
+	$(call project-create,LASA,Mica)
+	$(call project-create,LBLS,Mica)
+	$(call project-create,NuAge,Mica)
+	$(call project-create,PATH,Mica)
+	$(call project-create,SHIP,Mica)
+	$(call project-create,ULSAM,Mica)
 	
 seed-tables:
 	$(call tables-import,CPTP)
@@ -61,7 +61,7 @@ seed-index:
 	$(call table-index,CPTP,TTP_UHLQ_coreqx)
 
 seed-datashield:
-	$(call project-create,datashield)
+	$(call project-create,datashield,DataSHIELD)
 	$(call tables-import,datashield)	
 
 seed-taxonomies:
@@ -79,7 +79,7 @@ seed-taxonomies-latest:
 #
 # Functions
 #
-project-create = sed 's/@database@/$(database)/g' ./opal/seed/projects/project-template.json | sed 's/@name@/$(1)/g' | opal rest -o $(opal_url) -u $(username) -p $(password) -m POST /projects --content-type "application/json"
+project-create = sed 's/@database@/$(database)/g' ./opal/seed/projects/project-template.json | sed 's/@name@/$(1)/g' | sed 's/@tag@/$(2)/g' | opal rest -o $(opal_url) -u $(username) -p $(password) -m POST /projects --content-type "application/json"
 
 tables-import = opal file -o $(opal_url) -u $(username) -p $(password) -up ./opal/seed/dictionaries/$(1).zip /tmp && \
 	opal import-xml -o $(opal_url) -u $(username) -p $(password) -pa /tmp/$(1).zip -d $(1) && \
