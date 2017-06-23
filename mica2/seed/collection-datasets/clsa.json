@@ -1,0 +1,32 @@
+{
+    "id": "clsa",
+    "name": [
+        {
+            "lang": "en",
+            "value": "CLSA"
+        }
+    ],
+    "acronym": [
+        {
+            "lang": "en",
+            "value": "CLSA"
+        }
+    ],
+    "description": [
+        {
+            "lang": "en",
+            "value": "CLSA Tracking"
+        }
+    ],
+    "entityType": "Participant",
+    "published": false,
+    "obiba.mica.CollectionDatasetDto.type": {
+        "studyTable": {
+            "studyId": "clsa",
+            "populationId": "1",
+            "dataCollectionEventId": "1",
+            "project": "CLSA",
+            "table": "Tracking_60min_R1"
+        }
+    }
+}

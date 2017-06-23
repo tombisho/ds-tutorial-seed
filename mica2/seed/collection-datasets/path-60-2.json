@@ -1,0 +1,32 @@
+{
+    "id": "path-60-2",
+    "name": [
+        {
+            "lang": "en",
+            "value": "PATH 60+ Wave 2"
+        }
+    ],
+    "acronym": [
+        {
+            "lang": "en",
+            "value": "PATH-60-2"
+        }
+    ],
+    "description": [
+        {
+            "lang": "en",
+            "value": ""
+        }
+    ],
+    "entityType": "Participant",
+    "published": false,
+    "obiba.mica.CollectionDatasetDto.type": {
+        "studyTable": {
+            "studyId": "path",
+            "populationId": "3",
+            "dataCollectionEventId": "2",
+            "project": "PATH",
+            "table": "PATH_wave2"
+        }
+    }
+}

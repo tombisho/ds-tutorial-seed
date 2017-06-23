@@ -1,0 +1,32 @@
+{
+    "id": "ship",
+    "name": [
+        {
+            "lang": "en",
+            "value": "SHIP"
+        }
+    ],
+    "acronym": [
+        {
+            "lang": "en",
+            "value": "SHIP"
+        }
+    ],
+    "description": [
+        {
+            "lang": "en",
+            "value": ""
+        }
+    ],
+    "entityType": "Participant",
+    "published": false,
+    "obiba.mica.CollectionDatasetDto.type": {
+        "studyTable": {
+            "studyId": "ship",
+            "populationId": "1",
+            "dataCollectionEventId": "1",
+            "project": "SHIP",
+            "table": "ship_2013_154_d_s0_20131212"
+        }
+    }
+}
