@@ -1,0 +1,32 @@
+{
+    "id": "ship-trend",
+    "name": [
+        {
+            "lang": "en",
+            "value": "SHIP-TREND"
+        }
+    ],
+    "acronym": [
+        {
+            "lang": "en",
+            "value": "SHIP-TREND"
+        }
+    ],
+    "description": [
+        {
+            "lang": "en",
+            "value": ""
+        }
+    ],
+    "entityType": "Participant",
+    "published": false,
+    "obiba.mica.CollectionDatasetDto.type": {
+        "studyTable": {
+            "studyId": "ship",
+            "populationId": "2",
+            "dataCollectionEventId": "1",
+            "project": "SHIP",
+            "table": "ship_2013_154_d_s0_20131212"
+        }
+    }
+}
