@@ -17,10 +17,13 @@ mica-help:
 	@echo "Available make targets:"
 	@echo "  seed-mica : Seed mica server"
 
-seed-mica: seed-studies seed-datasets seed-harmonization-datasets
+seed-mica: seed-studies seed-harmonization-studies seed-datasets seed-harmonization-datasets
 
 seed-studies:
 	mica import-zip -mk $(mica_url) -u $(username) -p $(password) -pub ./mica2/seed/studies
+
+seed-harmonization-studies:
+	mica import-zip -mk $(mica_url) -u $(username) -p $(password) -pub ./mica2/seed/harmonization-studies
 
 seed-datasets: seed-study-datasets
 
