@@ -1,7 +1,7 @@
 #
 # Drupal
 #
-drupal_version = 7.54
+drupal_version = 7.56
 drupal_dir=$(CURDIR)/target/drupal
 
 #
