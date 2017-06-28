@@ -21,9 +21,62 @@
     "entityType": "Participant",
     "published": false,
     "obiba.mica.HarmonizationDatasetDto.type": {
-    	"networkId": "cptp",
         "project": "CPTP",
         "table": "Coreqx_final",
+        "studyReference": {
+          "populationId": "1",
+          "studyId": "cptp-hs",
+          "studySummary": {
+            "acronym": [
+              {
+                "lang": "en",
+                "value": "CPTP HS"
+              }
+            ],
+            "id": "cptp-hs",
+            "name": [
+              {
+                "lang": "en",
+                "value": "CPTP Harmonization Study"
+              }
+            ],
+            "obiba.mica.EntityStateDto.studySummaryState": {
+              "permissions": {
+                "delete": true,
+                "edit": true,
+                "publish": true,
+                "view": true
+              },
+              "revisionsAhead": 0
+            },
+            "objectives": [
+              {
+                "lang": "en",
+                "value": "General objective of the Harmo Study"
+              }
+            ],
+            "permissions": {
+              "delete": true,
+              "edit": true,
+              "publish": true,
+              "view": true
+            },
+            "populationSummaries": [
+              {
+                "id": "1",
+                "name": [
+                  {
+                    "lang": "en",
+                    "value": "CPTP Harmonization Study Population"
+                  }
+                ]
+              }
+            ],
+            "published": true,
+            "studyResourcePath": "harmonization-study",
+            "variables": 0
+          }
+        },
         "studyTables": [
             {
                 "studyId": "atlantic-path",
