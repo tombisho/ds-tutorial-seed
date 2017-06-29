@@ -21,11 +21,11 @@
     "entityType": "Participant",
     "published": false,
     "obiba.mica.HarmonizationDatasetDto.type": {
-        "project": "CPTP",
-        "table": "Coreqx_final",
-        "studyReference": {
-          "populationId": "1",
-          "studyId": "cptp-hs"          
+        "harmonizationLink": {
+          	"project": "CPTP",
+          	"table": "Coreqx_final",
+          	"populationId": "1",
+        	"studyId": "cptp-hs"          
         },
         "studyTables": [
             {
