@@ -62,6 +62,7 @@ seed-collection-datasets:
 
 seed-harmonization-datasets:
 	$(call dataset-create,harmonization,cptp-coreqx)
+	$(call dataset-create,harmonization,chpt-generic-ds)
 
 clean-mica:
 	rm -rf ${mica_home}
