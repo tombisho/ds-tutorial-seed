@@ -21,7 +21,7 @@
     }
   ],
   "obiba.mica.HarmonizationDatasetDto.type": {
-    "harmonizationLink": {
+    "harmonizationTable": {
       "populationId": "1",
       "project": "CHPT",
       "studyId": "chpt-project",
