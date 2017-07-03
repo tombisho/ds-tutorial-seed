@@ -20,33 +20,19 @@
       "value": "CHPT Generic DataSchema"
     }
   ],
-  "obiba.mica.EntityStateDto.datasetState": {
-    "permissions": {
-      "delete": true,
-      "edit": true,
-      "publish": true,
-      "view": true
-    },
-    "publicationDate": "2017-06-30T11:44:22.936-04:00",
-    "publishedBy": "administrator",
-    "publishedId": "9d8a503750fc497cd52050074f9a63052d7d099c",
-    "publishedTag": "1",
-    "revisionStatus": "DRAFT",
-    "revisionsAhead": 0
-  },
   "obiba.mica.HarmonizationDatasetDto.type": {
     "harmonizationLink": {
       "populationId": "1",
       "project": "CHPT",
       "studyId": "chpt-project",
-      "table": "CHPT_DataSchema"
+      "table": "CHPT_GENERIC_DS"
     },
     "harmonizationTables": [
       {
         "populationId": "1",
         "project": "CHPT",
         "studyId": "cptp-hs",
-        "table": "CPTPHS_table",
+        "table": "CPTP_table",
         "weight": 0
       }
     ],
@@ -94,16 +80,8 @@
         "populationId": "1",
         "dataCollectionEventId": "2",
         "project": "CHPT",
-        "table": "LIFELINES_table"
+        "table": "LifeLines_table"
       }
     ]
-  },
-  "permissions": {
-    "delete": true,
-    "edit": true,
-    "publish": true,
-    "view": true
-  },
-  "published": true,
-  "variableType": "Dataschema"
+  }
 }

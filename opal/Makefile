@@ -20,6 +20,7 @@ opal-help:
 seed-opal: seed-projects seed-tables seed-taxonomies
 
 seed-projects:
+	$(call project-create,CHPT,Mica)
 	$(call project-create,CPTP,Mica)
 	$(call project-create,FNAC,Mica)
 	$(call project-create,CLS,Mica)
@@ -34,6 +35,7 @@ seed-projects:
 	$(call project-create,ULSAM,Mica)
 	
 seed-tables:
+	$(call tables-import,CHPT)
 	$(call tables-import,CPTP)
 	$(call tables-import,FNAC)
 	$(call tables-import,CLS)
