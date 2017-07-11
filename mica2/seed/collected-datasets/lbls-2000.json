@@ -20,7 +20,7 @@
     ],
     "entityType": "Participant",
     "published": false,
-    "obiba.mica.CollectionDatasetDto.type": {
+    "obiba.mica.CollectedDatasetDto.type": {
         "studyTable": {
             "studyId": "lbls",
             "populationId": "1",
