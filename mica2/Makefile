@@ -59,6 +59,7 @@ seed-collected-datasets:
 	$(call dataset-create,collected,lasa-3)
 	$(call dataset-create,collected,ship)
 	$(call dataset-create,collected,ship-trend)
+	$(call dataset-create,collected,cag-baseline)
 
 seed-harmonization-datasets:
 	$(call dataset-create,harmonization,cptp-coreqx)

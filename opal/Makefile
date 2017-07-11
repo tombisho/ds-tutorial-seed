@@ -33,6 +33,7 @@ seed-projects:
 	$(call project-create,PATH,Mica)
 	$(call project-create,SHIP,Mica)
 	$(call project-create,ULSAM,Mica)
+	$(call project-create,CaG,Mica)
 	
 seed-tables:
 	$(call tables-import,CHPT)
@@ -48,6 +49,7 @@ seed-tables:
 	$(call tables-import,PATH)
 	$(call tables-import,SHIP)
 	$(call tables-import,ULSAM)
+	$(call tables-import,CaG)
 
 seed-index:
 	$(call table-index,FNAC,FNAC)
