@@ -19,10 +19,10 @@ mica-help:
 
 seed-mica: seed-studies seed-datasets
 
-seed-studies: seed-collection-studies seed-harmonization-studies
+seed-studies: seed-individual-studies seed-harmonization-studies
 
-seed-collection-studies:
-	mica import-zip -mk $(mica_url) -u $(username) -p $(password) -pub ./mica2/seed/collection-studies
+seed-individual-studies:
+	mica import-zip -mk $(mica_url) -u $(username) -p $(password) -pub ./mica2/seed/individual-studies
 
 seed-harmonization-studies:
 	mica import-zip -mk $(mica_url) -u $(username) -p $(password) -pub ./mica2/seed/harmonization-studies
