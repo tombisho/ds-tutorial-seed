@@ -27,7 +27,7 @@ seed-individual-studies:
 seed-harmonization-studies:
 	mica import-zip -mk $(mica_url) -u $(username) -p $(password) -pub ./mica2/seed/harmonization-studies
 
-seed-datasets: seed-collected-datasets seed-harmonization-datasets
+seed-datasets: seed-collected-datasets seed-harmonized-datasets
 
 seed-collected-datasets:
 	$(call dataset-create,collected,cls-wave1)
@@ -61,9 +61,9 @@ seed-collected-datasets:
 	$(call dataset-create,collected,ship-trend)
 	$(call dataset-create,collected,cag-baseline)
 
-seed-harmonization-datasets:
-	$(call dataset-create,harmonization,cptp-coreqx)
-	$(call dataset-create,harmonization,chpt-generic-ds)
+seed-harmonized-datasets:
+	$(call dataset-create,harmonized,cptp-coreqx)
+	$(call dataset-create,harmonized,chpt-generic-ds)
 
 clean-mica:
 	rm -rf ${mica_home}
