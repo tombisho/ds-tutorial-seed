@@ -20,7 +20,7 @@
     ],
     "entityType": "Participant",
     "published": false,
-    "obiba.mica.HarmonizationDatasetDto.type": {
+    "obiba.mica.HarmonizedDatasetDto.type": {
         "harmonizationTable": {
           	"project": "CPTP",
           	"table": "Coreqx_final",
