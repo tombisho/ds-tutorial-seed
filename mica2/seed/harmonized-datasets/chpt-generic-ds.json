@@ -20,7 +20,7 @@
       "value": "CHPT Generic DataSchema"
     }
   ],
-  "obiba.mica.HarmonizationDatasetDto.type": {
+  "obiba.mica.HarmonizedDatasetDto.type": {
     "harmonizationTable": {
       "populationId": "1",
       "project": "CHPT",
