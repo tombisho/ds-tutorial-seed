@@ -1,7 +1,7 @@
-mica_branch_version=21.x
+mica_branch_version=22.x
 drupal_branch_version=7.x
 
-# next release version tag
+# next release version tag 
 tag_mica_version=22.1
 
 branch=$(drupal_branch_version)-$(mica_branch_version)
