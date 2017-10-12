@@ -17,7 +17,7 @@ mica-help:
 	@echo "Available make targets:"
 	@echo "  seed-mica : Seed mica server"
 
-seed-mica: seed-studies seed-datasets
+seed-mica: seed-studies seed-datasets index-taxonomies
 
 seed-studies: seed-individual-studies seed-harmonization-studies
 
@@ -64,6 +64,9 @@ seed-collected-datasets:
 seed-harmonized-datasets:
 	$(call dataset-create,harmonized,cptp-coreqx)
 	$(call dataset-create,harmonized,chpt-generic-ds)
+
+index-taxonomies:
+	mica rest -mk $(mica_url) -u $(username) -p $(password) /taxonomies/_index -m PUT
 
 clean-mica:
 	rm -rf ${mica_home}
