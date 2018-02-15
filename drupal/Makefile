@@ -16,6 +16,7 @@ db_host = localhost
 # www settings
 #
 www=html/drupal
+apache_user=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
 
 #
 # Snapshot branches
@@ -87,7 +88,7 @@ prepare-install-drupal:
 www:
 	sudo rm -f /var/www/$(www) && \
 	sudo ln -s $(drupal_dir) /var/www/$(www) && \
-	sudo chown -R www-data:www-data /var/www/$(www)
+	sudo chown -R $(apache_user): /var/www/$(www)
 
 dump-sql:
 	mysqldump -h $(db_host) -u $(db_user) --password=$(db_pass) --hex-blob $(db_name) --result-file="drupal/drupal-$(drupal_version).sql"
@@ -245,7 +246,7 @@ update-composer-autoload:
 
 cc:
 	cd $(drupal_dir) && drush cc all && \
-	sudo chown -R www-data:www-data .
+	sudo chown -R $(apache_user): .
 
 
 #
