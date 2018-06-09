@@ -1,0 +1,32 @@
+{
+    "id": "path-40-3",
+    "name": [
+        {
+            "lang": "en",
+            "value": "PATH 40+ Wave 3"
+        }
+    ],
+    "acronym": [
+        {
+            "lang": "en",
+            "value": "PATH-40-3"
+        }
+    ],
+    "description": [
+        {
+            "lang": "en",
+            "value": ""
+        }
+    ],
+    "entityType": "Participant",
+    "published": false,
+    "obiba.mica.CollectedDatasetDto.type": {
+        "studyTable": {
+            "studyId": "path",
+            "populationId": "2",
+            "dataCollectionEventId": "3",
+            "project": "PATH",
+            "table": "PATH_wave3"
+        }
+    }
+}

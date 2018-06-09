@@ -1,0 +1,57 @@
+{
+    "facets": [
+        {
+            "facet": "1",
+            "filters": [
+                {
+                    "count": 4
+                }
+            ],
+            "values": [
+                {
+                    "count": 3
+                }
+            ]
+        },
+        {
+            "facet": "2",
+            "filters": [
+                {
+                    "count": 5
+                }
+            ],
+            "values": [
+                {
+                    "count": 3
+                }
+            ]
+        },
+        {
+            "facet": "total",
+            "filters": [
+                {
+                    "count": 2
+                }
+            ],
+            "values": [
+                {
+                    "count": 1
+                }
+            ]
+        },
+        {
+            "facet": "3",
+            "filters": [
+                {
+                    "count": 5
+                }
+            ],
+            "values": [
+                {
+                    "count": 2
+                }
+            ]
+        }
+    ],
+    "totalHits": 6
+}

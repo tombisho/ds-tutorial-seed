@@ -1,0 +1,32 @@
+{
+    "id": "path-20-1",
+    "name": [
+        {
+            "lang": "en",
+            "value": "PATH 20+ Wave 1"
+        }
+    ],
+    "acronym": [
+        {
+            "lang": "en",
+            "value": "PATH-20-1"
+        }
+    ],
+    "description": [
+        {
+            "lang": "en",
+            "value": ""
+        }
+    ],
+    "entityType": "Participant",
+    "published": false,
+    "obiba.mica.CollectedDatasetDto.type": {
+        "studyTable": {
+            "studyId": "path",
+            "populationId": "1",
+            "dataCollectionEventId": "1",
+            "project": "PATH",
+            "table": "PATH_wave1"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "id": "lasa-1",
+    "name": [
+        {
+            "lang": "en",
+            "value": "LASA 1"
+        }
+    ],
+    "acronym": [
+        {
+            "lang": "en",
+            "value": "LASA 1"
+        }
+    ],
+    "description": [
+        {
+            "lang": "en",
+            "value": "First cohort"
+        }
+    ],
+    "entityType": "Participant",
+    "published": false,
+    "obiba.mica.CollectedDatasetDto.type": {
+        "studyTable": {
+            "studyId": "lasa",
+            "populationId": "1",
+            "dataCollectionEventId": "1",
+            "project": "LASA",
+            "table": "LASA_sampleofvariables"
+        }
+    }
+}
