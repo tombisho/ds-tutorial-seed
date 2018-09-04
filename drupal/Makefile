@@ -11,7 +11,7 @@ admin_password=password
 # Mysql db access
 #
 db_name = drupal
-db_user = root
+db_user = drupal
 db_pass = 1234
 db_host = localhost
 
