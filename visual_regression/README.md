@@ -7,7 +7,7 @@ It take screenShots based on a json scenarios to test, then perform diff html re
 Make a reference ----> test a target vs the reference ---> Fix issues
 ### Make a reference : 
 `
-make reference referenceUrl=http://localhost/drupal-release lagServer=1.2
+make site-reference referenceUrl=http://localhost/drupal-release lagServer=1.2
 `
 ### Perform a test : 
 `
