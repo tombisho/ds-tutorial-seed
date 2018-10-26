@@ -17,7 +17,7 @@ var scenarios = [
   "delay": 'searchLoad'
   },
   {
-    "label": "Harmonized Datasets List Page go to advenced search page",
+    "label": "Harmonized Datasets List Page go to advanced search page",
     "path": pagePath,
     "clicksSelectors": [".list-search-widget > div:nth-child(2) > small > a"],
     "delay": 'searchLoad'
