@@ -1,27 +1,12 @@
 SHELL := /bin/bash
 # BackstopJS Command helper
-backstop_dir=~/projects/mica2-home/visual_regression
+backstop_dir=~/projects/obiba-home/visual_regression
 lagServer=1
 
 #layout 2
-scenariosSearchList=scenariosSearchList
-scenariosSearchPanelNavigation=scenariosSearchPanelNavigation
-scenariosNetworksListPage=scenariosNetworksListPage
-scenariosCollectedDatasetsListPage=scenariosCollectedDatasetsListPage
-scenariosHarmonizedDatasetsListPage=scenariosHarmonizedDatasetsListPage
-scenariosHarmonizationStudiesListPage=scenariosHarmonizationStudiesListPage
-scenariosCollectedStudiesListPage=scenariosCollectedStudiesListPage
+LAYOUT2SCENARIOS = $(patsubst layout2/%.js,%,$(wildcard layout2/*.js))
 #Layout 1
-layout1ScenariosSearchList=layout1ScenariosSearchList
-layout1ScenariosSearchQueryNavigation=layout1ScenariosSearchQueryNavigation
-layout1ScenariosNetworksListPage=layout1ScenariosNetworksListPage
-layout1ScenariosCollectedDatasetsListPage=layout1ScenariosCollectedDatasetsListPage
-layout1ScenariosHarmonizedDatasetsListPage=layout1ScenariosHarmonizedDatasetsListPage
-layout1ScenariosHarmonizationStudiesListPage=layout1ScenariosHarmonizationStudiesListPage
-layout1ScenariosCollectedStudiesListPage=layout1ScenariosCollectedStudiesListPage
-
-layout1=layout1
-layout2=layout2
+LAYOUT1SCENARIOS = $(patsubst layout1/%.js,%,$(wildcard layout1/*.js))
 
 #dev
 dev_scenario=scenariosCollectedDatasetsListPage
@@ -45,27 +30,20 @@ install-test:
 	echo "backstopjs installtion dependecies" && \
 	npm install backstopjs -g && \
 	npm install minimist && \
-	npm install  xpath-to-css 
-	
+	npm install  xpath-to-css
 
 site-reference:
-	pushd $(backstop_dir) && \
-	$(call switch-layout,$(layout1)) && \
-	$(call backstop-command-$(layout1),reference,$(host),$(lagServer),$(referenceUrl)) && \
-	$(call switch-layout,$(layout2)) && \
-	$(call backstop-command-$(layout2),reference,$(host),$(lagServer),$(referenceUrl)) && popd
+	$(call backstop-action,reference,layout1,$(LAYOUT1SCENARIOS)) && \
+	$(call backstop-action,reference,layout2,$(LAYOUT2SCENARIOS))
+	echo "Test complete"
 
 site-test:
-	pushd $(backstop_dir) && \
-	$(call switch-layout,$(layout2)) && \
-	$(call backstop-command-$(layout2),test,$(host),$(lagServer),$(referenceUrl)) && \
-	$(call switch-layout,$(layout1)) && \
-	$(call backstop-command-$(layout1),test,$(host),$(lagServer),$(referenceUrl)) && popd
+	$(call backstop-action,test,layout1,$(LAYOUT1SCENARIOS)) || \
+	$(call backstop-action,test,layout2,$(LAYOUT2SCENARIOS))
 
 site-report:
-	pushd $(backstop_dir) && \
-	$(call backstop-command-$(layout2),openReport,$(host),$(lagServer),$(referenceUrl)) && \
-	$(call backstop-command-$(layout1),openReport,$(host),$(lagServer),$(referenceUrl)) && popd
+	$(call backstop-action,openReport,layout1,$(LAYOUT1SCENARIOS)) && \
+	$(call backstop-action,openReport,layout2,$(LAYOUT2SCENARIOS))
 
 site-approve:
 	pushd $(backstop_dir) && \
@@ -82,39 +60,16 @@ test-dev:
 	$(call switch-layout,$(layout_dev)) && \
 	backstop test --configPath=backstop.js --dev=$(dev) --scenariosSet=$(dev_scenario).js --host=$(host) --referenceUrl=$(referenceUrl) --lagServer=$(lagServer) --testFolder=$(dev_scenario) --layout=$(layout_dev) && popd
 
-backstop-command-layout2 = echo $(2) && \
-	echo "backstopjs Test Search page scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(scenariosSearchList).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(scenariosSearchList) --layout=$(layout2) || \
-	echo "backstopjs Test Search page panel navigation scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(scenariosSearchPanelNavigation).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(scenariosSearchPanelNavigation) --layout=$(layout2) || \
-	echo "backstopjs Test Networks list page scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(scenariosNetworksListPage).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(scenariosNetworksListPage) --layout=$(layout2) || \
-	echo "backstopjs Test Collected Datasets list scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(scenariosCollectedDatasetsListPage).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(scenariosCollectedDatasetsListPage) --layout=$(layout2) || \
-	echo "backstopjs Test Harmonized Datasets list scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(scenariosHarmonizedDatasetsListPage).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(scenariosHarmonizedDatasetsListPage) --layout=$(layout2) || \
-	echo "backstopjs Test Harmonization Studies list scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(scenariosHarmonizationStudiesListPage).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(scenariosHarmonizationStudiesListPage) --layout=$(layout2) || \
-	echo "backstopjs Test Collected Studies list scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(scenariosCollectedStudiesListPage).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(scenariosCollectedStudiesListPage) --layout=$(layout2) || \
-	echo Test complete
 
-backstop-command-layout1 = echo $(2) && \
-	echo "backstopjs Test Search page scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(layout1ScenariosSearchList).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(layout1ScenariosSearchList) --layout=$(layout1) || \
-	echo "backstopjs Test Search page query navigations scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(layout1ScenariosSearchQueryNavigation).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(layout1ScenariosSearchQueryNavigation) --layout=$(layout1) || \
-	echo "backstopjs Test Networks list page scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(layout1ScenariosNetworksListPage).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(layout1ScenariosNetworksListPage) --layout=$(layout1) || \
-	echo "backstopjs Test Collected Datasets list scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(layout1ScenariosCollectedDatasetsListPage).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(layout1ScenariosCollectedDatasetsListPage) --layout=$(layout1) || \
-	echo "backstopjs Test Harmonized Datasets list scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(layout1ScenariosHarmonizedDatasetsListPage).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(layout1ScenariosHarmonizedDatasetsListPage) --layout=$(layout1) || \
-	echo "backstopjs Test Harmonization Studies list scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(layout1ScenariosHarmonizationStudiesListPage).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(layout1ScenariosHarmonizationStudiesListPage) --layout=$(layout1) || \
-	echo "backstopjs Test Collected Studies list scenarios" && \
-	backstop $(1) --configPath=backstop.js --scenariosSet=$(layout1ScenariosCollectedStudiesListPage).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(layout1ScenariosCollectedStudiesListPage) --layout=$(layout1) && \
-	echo Test complete
+backstop-action = pushd $(backstop_dir) && \
+				$(call switch-layout,$(2)) && \
+				for file in $(3) ; \
+				do \
+						$(call backstop-command,$(1),$(host),$(lagServer),$(referenceUrl),$(2),$$file) ; \
+				done
+
+
+backstop-command = backstop $(1) --configPath=backstop.js --scenariosSet=$(6).js --host=$(2) --referenceUrl=$(4) --lagServer=$(3) --testFolder=$(6) --layout=$(5)
 
 switch-layout = sed 's/@layout@/$(1)/g' config.json.layout > config.json && \
 	mica rest /config -m PUT  -u administrator -p password -mk http://localhost:8082 --content-type  application/json < config.json && \

@@ -1,6 +1,5 @@
-var xPathToCss = require('xpath-to-css');
-function clickOnSelector(){
-  return xPathToCss('//button[@id="SortOrder"]');
+function clickOnStudy(study){
+  return "div[test-ref='study']:nth-child(" + study + ") > div:nth-child(2) > a";
 }
 
 function counClick(study, countLabel){
@@ -26,37 +25,37 @@ var scenarios = [
     "label": "Harmonization Studies List Page click on sort button",
     "path": pagePath,
     "clickSelector": 'button#SortOrder',
-    "delay": 'delayOnPage',
+    "delay": 'delayOnPage'
   },
   {
     "label": "Harmonization Studies List Page got to chpt-project detail page",
     "path": pagePath,
-    "clickSelector": "h4 > a[href*='harmonization-study/chpt-project']",
-    "delay" : 'detailPageLoad'
+    "clickSelector": clickOnStudy(1),
+    "delay" : 'searchLoad'
   },
   {
     "label": "Harmonization Studies List Page got to cptp-hs detail page",
     "path": pagePath,
-    "clickSelector": "h4 > a[href*='harmonization-study/cptp-hs']",
-    "delay" : 'detailPageLoad'
+    "clickSelector": clickOnStudy(2),
+    "delay" : 'searchLoad'
   },
   {
     "label": "Harmonization Studies List Page -CPTP Harmonization Study- click on Variables count",
     "path": pagePath,
     "clickSelector": counClick('2', 'dataSchemaVariableCount'),
-    "delay" : 'searchLoad',
+    "delay" : 'searchLoad'
   },
   {
     "label": "Harmonization Studies List Page -CPTP Harmonization Study- click on Dataset count",
     "path": pagePath,
     "clickSelector": counClick('2', 'datasetCount'),
-    "delay" : 'searchLoad',
+    "delay" : 'searchLoad'
   },
   {
     "label": "Harmonization Studies List Page -CPTP Harmonization Study- click on Network count",
     "path": pagePath,
     "clickSelector": counClick('2', 'networkCount'),
-    "delay" : 'searchLoad',
+    "delay" : 'searchLoad'
   },
   {
     "label": "Harmonization Studies List Page input text search cptp",
@@ -65,7 +64,7 @@ var scenarios = [
       "selector" : "entity-search-typeahead input[type=\"search\"]",
       "text": "cptp"
     },
-    "delay" : 'searchLoad',
+    "delay" : 'searchLoad'
   }
 ];
 

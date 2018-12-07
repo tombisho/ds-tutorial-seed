@@ -1,14 +1,13 @@
 
 var pagePath = "/user/login";
 
-
 var scenarios = [
   {
     "label": "User Login",
     "path": pagePath,
     "delay": 'searchLoad',
     "credential": {
-      "login": "administrator",
+      "login": "user1",
       "password": "password"
     }
   }

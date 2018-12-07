@@ -100,6 +100,12 @@ if (scenariosSet) {
         "onReadyScript": scenario.onReadyScript
       });
   }
+    if (scenario.readySelector) {
+      defaultSetting.readySelector = scenario.readySelector;
+    }
+    if (scenario.credential) {
+      defaultSetting.credential = scenario.credential;
+    }
 
     scenarios.push(defaultSetting);
   });
@@ -130,7 +136,7 @@ module.exports =
     "report": ["browser"],
     "engine": "chrome",
     "engineOptions": {
-      waitTimeout: 15000,
+      waitTimeout: 15000
     },
     "asyncCaptureLimit": 5,
     "asyncCompareLimit": 50,

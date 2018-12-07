@@ -45,4 +45,16 @@ module.exports = function (chromy, scenario) {
       );
     });
   }
+  
+  if(scenario.hasOwnProperty('credential')){
+    chromy
+      .type('input[name="name"]', scenario.credential.login)
+      .sleep(30)
+      .type('input[name="pass"]', scenario.credential.password)
+      .sleep(30)
+      .click('button[name="op"]')
+      .sleep(600);
+
+  }
+  
 };
