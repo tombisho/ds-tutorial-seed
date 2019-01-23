@@ -1,7 +1,7 @@
 #
 # Drupal
 #
-drupal_version = 7.62
+drupal_version = 7.63
 drupal_dir=$(CURDIR)/target/drupal
 
 admin_user=administrator
@@ -93,10 +93,10 @@ www:
 	sudo chown -R www-data: /var/www/$(www)
 
 dump-sql:
-	mysqldump -h $(db_host) -u $(db_user) --password=$(db_pass) --hex-blob $(db_name) --result-file="drupal/drupal-$(drupal_version).sql"
+	mysqldump -h $(db_host) -u $(db_user) --password=$(db_pass) --default-character-set=utf8mb4  --hex-blob $(db_name) --result-file="drupal/drupal-$(drupal_version).sql"
 
 create-sql:
-	mysql -h $(db_host) -u $(db_user) --password=$(db_pass) -e "drop database if exists $(db_name); create database $(db_name);"
+	mysql -h $(db_host) -u $(db_user) --password=$(db_pass) -e "drop database if exists $(db_name); create database $(db_name) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
 drupal-first-install:
 	pushd $(drupal_dir) && \
@@ -106,7 +106,7 @@ drupal-first-install:
 import-sql: create-sql import-sql-tables
 
 import-sql-tables:
-	mysql -h $(db_host) -u $(db_user) --password=$(db_pass) $(db_name) < "drupal/drupal-$(drupal_version).sql"
+	mysql -h $(db_host) -u $(db_user) --password=$(db_pass)  --default-character-set=utf8mb4 $(db_name) < "drupal/drupal-$(drupal_version).sql"
 
 finalize-drupal: settings htaccess
 
@@ -130,7 +130,7 @@ enable-modules-release-branch: enable-bootstrap enable-mica enable-data-access e
 
 enable-bootstrap:
 	cd $(drupal_dir) && \
-	drush dl -y bootstrap && \
+	drush dl -y bootstrap-7.x-3.22 && \
 	drush en -y bootstrap && \
 	drush en -y obiba_bootstrap
 
