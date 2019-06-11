@@ -1,14 +1,9 @@
 version: '3'
 
-volumes:
-  mysql_data:
-      driver: local
-
 services:
   mysql:
       image: mysql:5.7
-      volumes:
-        - mysql_data:/var/lib/mysql
+      container_name: keycloakdb
       environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: keycloak
@@ -16,6 +11,7 @@ services:
         MYSQL_PASSWORD: password
   keycloak:
       image: jboss/keycloak
+      container_name: keycloakserver
       environment:
         DB_VENDOR: MYSQL
         DB_ADDR: mysql
