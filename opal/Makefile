@@ -11,7 +11,7 @@ taxonomies_key=4929750633404868
 database=opal_data
 
 opal-help:
-	@echo 
+	@echo
 	@echo "Seed Opal server with some generated data. Requires opal python client to be installed."
 	@echo
 	@echo "Available make targets:"
@@ -34,7 +34,7 @@ seed-projects:
 	$(call project-create,SHIP,Mica)
 	$(call project-create,ULSAM,Mica)
 	$(call project-create,CaG,Mica)
-	
+
 seed-tables:
 	$(call tables-import,CHPT)
 	$(call tables-import,CPTP)
@@ -65,8 +65,16 @@ seed-index:
 	$(call table-index,CPTP,TTP_UHLQ_coreqx)
 
 seed-datashield:
-	$(call project-create,datashield,DataSHIELD)
-	$(call tables-import,datashield)	
+	$(call project-create,CNSIM,DataSHIELD)
+	$(call tables-import,CNSIM)
+	$(call project-create,DASIM,DataSHIELD)
+	$(call tables-import,DASIM)
+	$(call project-create,DISCORDANT,DataSHIELD)
+	$(call tables-import,DISCORDANT)
+	$(call project-create,SURVIVAL,DataSHIELD)
+	$(call tables-import,SURVIVAL)
+	$(call project-create,TESTING,DataSHIELD)
+	$(call tables-import,TESTING)
 
 seed-taxonomies:
 	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?user=maelstrom-research&repo=maelstrom-taxonomies&override=true&ref=$(taxonomies_ref)&key=$(taxonomies_key)"
