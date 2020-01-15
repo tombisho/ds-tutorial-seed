@@ -11,7 +11,7 @@ skipTests = false
 mvn_exec = mvn -Dmaven.test.skip=${skipTests}
 
 mica-help:
-	@echo 
+	@echo
 	@echo "Seed Mica server with some networks, studies and datasets. Requires mica python client to be installed."
 	@echo
 	@echo "Available make targets:"
@@ -19,7 +19,7 @@ mica-help:
 
 seed-mica: seed-studies seed-datasets index-taxonomies
 
-seed-studies: seed-individual-studies seed-harmonization-studies
+seed-studies: seed-individual-studies seed-harmonization-studies seed-people
 
 seed-individual-studies:
 	mica import-zip -mk $(mica_url) -u $(username) -p $(password) -pub ./mica2/seed/individual-studies
@@ -78,6 +78,9 @@ seed-collected-datasets:
 seed-harmonized-datasets:
 	$(call dataset-create,harmonized,cptp-coreqx)
 	$(call dataset-create,harmonized,chpt-generic-ds)
+
+seed-people:
+	find ./mica2/seed/people -type f -execdir curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" http://localhost:8082/ws/draft/persons -d @{} -u administrator:password \;
 
 index-taxonomies:
 	mica rest -mk $(mica_url) -u $(username) -p $(password) /taxonomies/_index -m PUT
