@@ -80,7 +80,7 @@ seed-harmonized-datasets:
 	$(call dataset-create,harmonized,chpt-generic-ds)
 
 seed-people:
-	find ./mica2/seed/people -type f -execdir curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" http://localhost:8082/ws/draft/persons -d @{} -u administrator:password \;
+	find ./mica2/seed/people -type f -execdir curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json" ${mica_url}/ws/draft/persons -d @{} -u administrator:password \;
 
 index-taxonomies:
 	mica rest -mk $(mica_url) -u $(username) -p $(password) /taxonomies/_index -m PUT
