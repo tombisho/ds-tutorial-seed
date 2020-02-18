@@ -1,0 +1,1 @@
+{"name":"example.vcf","project":"test","provider":"opal-resource-commons","factory":"http-generic-file","parameters":"{\"url\":\"https://raw.githubusercontent.com/isglobal-brge/scoreInvHap/master/inst/extdata/example.vcf?method=biallelic.only&snpfirstdim=TRUE\", \"format\":\"VCF2GDS\", \"_package\":\"dsOmics\"}","credentials":"{\"username\":\"\", \"password\":\"password\"}"}

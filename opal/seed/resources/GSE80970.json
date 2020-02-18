@@ -1,0 +1,1 @@
+{"name":"GSE80970","project":"test","provider":"opal-resource-commons","factory":"local-rdata-file","parameters":"{\"path\":\"/srv/data/GSE80970.Rdata\", \"format\":\"ExpressionSet\"}","credentials":"{}"}

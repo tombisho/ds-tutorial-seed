@@ -1,0 +1,1 @@
+{"name":"CNSIM2","project":"test","provider":"opal-resource-commons","factory":"local-tidy-file","parameters":"{\"path\":\"/srv/data/CNSIM2.zsav\", \"format\":\"sav\"}","credentials":"{}"}

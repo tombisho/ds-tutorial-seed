@@ -1,0 +1,8 @@
+{
+    "credentials": "{\"username\":\"\", \"password\":\"\"}",
+    "factory": "http-rdata-file",
+    "name": "tcga_liver",
+    "parameters": "{\"url\":\"http://duffel.rail.bio/recount/TCGA/rse_gene_liver.Rdata\", \"format\":\"RangedSummarizedExperiment\"}",
+    "project": "test",
+    "provider": "opal-resource-commons"
+  }

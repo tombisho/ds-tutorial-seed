@@ -1,0 +1,1 @@
+{"name":"as.resource.data.frame","DataShield.RScriptDataShieldMethodDto.method":{"script":"function(x) {x$asDataFrame()}"}}

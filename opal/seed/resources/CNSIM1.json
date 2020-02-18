@@ -1,0 +1,1 @@
+{"name":"CNSIM1","project":"test","provider":"opal-resource-commons","factory":"sql","parameters":"{\"driver\":\"mysql\", \"host\":\"mysqldata\", \"port\":\"3306\", \"db\":\"opal\", \"table\":\"CNSIM1\"}","credentials":"{\"username\":\"opal\", \"password\":\"password\"}"}

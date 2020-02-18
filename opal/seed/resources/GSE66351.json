@@ -1,0 +1,1 @@
+{"name":"GSE66351","project":"test","provider":"opal-resource-commons","factory":"http-rdata-file","parameters":"{\"url\":\"https://github.com/epigeny/dsOmics/raw/master/data/GSE66351.Rdata\", \"format\":\"ExpressionSet\"}","credentials":"{\"username\":\"\", \"password\":\"\"}"}

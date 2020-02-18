@@ -76,6 +76,32 @@ seed-datashield:
 	$(call project-create,TESTING,DataSHIELD)
 	$(call tables-import,TESTING)
 
+seed-resources:
+	$(call project-create,test,Resources)
+	$(call resource-create,test,GSE66351)
+	$(call resource-create,test,GSE80970)
+	$(call resource-create,test,CNSIM1)
+	$(call resource-create,test,CNSIM2)
+	$(call resource-create,test,CNSIM3)
+	$(call resource-create,test,example.vcf)
+	$(call resource-create,test,1000G_vcf)
+	$(call resource-create,test,1000G_covars)
+	$(call resource-create,test,obesity_vcf)
+	$(call resource-create,test,tcga_liver)
+	$(call resource-create,test,obesity)
+	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /system/subject-token/_current/tokens < ./opal/seed/auth/token.json
+	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /datashield/env/assign/methods < ./opal/seed/datashield/as.resource.data.frame.json
+	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /datashield/env/assign/methods < ./opal/seed/datashield/as.resource.object.json
+	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /datashield/env/assign/methods < ./opal/seed/datashield/as.resource.tbl.json
+	sudo mkdir -p /tmp/rserver/data
+	sudo cp opal/seed/data/CNSIM2.zsav /tmp/rserver/data
+	sudo cp opal/seed/data/GSE80970.Rdata /tmp/rserver/data
+	sudo mkdir -p /tmp/opal/fs/projects/test
+	sudo cp opal/seed/data/CNSIM3.zip /tmp/opal/fs/projects/test
+	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/project/test/permissions/resources?type=USER&permission=RESOURCES_VIEW&principal=dsuser"
+	opal user -o $(opal_url) -u $(username) -p $(password) -n dsuser -upa password -a
+	opal perm-datashield -o $(opal_url) -u $(username) -p $(password) -s dsuser -ty user -pe use -a
+
 seed-taxonomies:
 	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?user=maelstrom-research&repo=maelstrom-taxonomies&override=true&ref=$(taxonomies_ref)&key=$(taxonomies_key)"
 
@@ -100,3 +126,5 @@ tables-import = opal file -o $(opal_url) -u $(username) -p $(password) -up ./opa
 taxonomy-import = opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?repo=maelstrom-taxonomies&key=$(taxonomies_key)&override=true&file=$(1).yml"
 
 table-index = opal rest -o $(opal_url) -u $(username) -p $(password) -m PUT "/datasource/$(1)/table/$(2)/index"
+
+resource-create = opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST "/project/$(1)/resources" < ./opal/seed/resources/$(2).json

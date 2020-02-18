@@ -1,0 +1,1 @@
+{"name":"CNSIM3","project":"test","provider":"opal-resource-commons","factory":"opal-tidy-file","parameters":"{\"url\":\"https://opal-test.obiba.org\", \"path\":\"/projects/test/CNSIM3.zip\", \"format\":\"csv\"}","credentials":"{\"token\":\"EeTtQGIob6haio5bx6FUfVvIGkeZJfGq\"}"}
