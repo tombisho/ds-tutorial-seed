@@ -2,6 +2,7 @@
 
 include mica2/Makefile
 include opal/Makefile
+include agate/Makefile
 include drupal/Makefile
 include drupal/drupal-release-utilities.mk
 include drupal/obiba-agate-release.mk
