@@ -89,15 +89,15 @@ seed-resources:
 	$(call resource-create,test,obesity_vcf)
 	$(call resource-create,test,tcga_liver)
 	$(call resource-create,test,obesity)
+	$(call resource-create,test,gps_data)
+	$(call resource-create,test,takeaway_gps)
 	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /system/subject-token/_current/tokens < ./opal/seed/auth/token.json
-	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /datashield/env/assign/methods < ./opal/seed/datashield/as.resource.data.frame.json
-	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /datashield/env/assign/methods < ./opal/seed/datashield/as.resource.object.json
-	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /datashield/env/assign/methods < ./opal/seed/datashield/as.resource.tbl.json
 	sudo mkdir -p /tmp/rserver/data
 	sudo cp opal/seed/data/CNSIM2.zsav /tmp/rserver/data
 	sudo cp opal/seed/data/GSE80970.Rdata /tmp/rserver/data
 	sudo mkdir -p /tmp/opal/fs/projects/test
 	sudo cp opal/seed/data/CNSIM3.zip /tmp/opal/fs/projects/test
+	sudo cp opal/seed/data/*RData /tmp/opal/fs/projects/test
 	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/project/test/permissions/resources?type=USER&permission=RESOURCES_VIEW&principal=dsuser"
 	opal user -o $(opal_url) -u $(username) -p $(password) -n dsuser -upa password -a
 	opal perm-datashield -o $(opal_url) -u $(username) -p $(password) -s dsuser -ty user -pe use -a
