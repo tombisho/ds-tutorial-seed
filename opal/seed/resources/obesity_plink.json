@@ -1,0 +1,8 @@
+{
+  "credentials": "{}", 
+  "factory": "sh", 
+  "name": "obesity_plink", 
+  "parameters": "{\"workDir\":\"/srv/data/obesity\", \"exec\":[{\"name\":\"plink1\"},{\"name\":\"ls\"}]}", 
+  "project": "test", 
+  "provider": "opal-resource-commons" 
+}
