@@ -1,8 +1,0 @@
-{
-  "credentials": "{\"username\":\"master\", \"password\":\"master\"}", 
-  "factory": "ssh", 
-  "name": "obesity_plink_remote", 
-  "parameters": "{\"host\":\"opal-test.obiba.org\", \"port\":\"2222\", \"workDir\":\"/home/master/obesity\", \"exec\":[{\"name\":\"ls\"},{\"name\":\"plink1\"},{\"name\":\"rm\"}]}", 
-  "project": "test", 
-  "provider": "opal-resource-commons" 
-}

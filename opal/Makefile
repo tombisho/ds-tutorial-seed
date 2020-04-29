@@ -89,8 +89,7 @@ seed-resources:
 	$(call resource-create,test,brge_vcf)
 	$(call resource-create,test,tcga_liver)
 	$(call resource-create,test,brge)
-	$(call resource-create,test,obesity_plink)
-	$(call resource-create,test,obesity_plink_remote)
+	$(call resource-create,test,brge_plink)
 	$(call resource-create,test,gps_data)
 	$(call resource-create,test,takeaway_gps)
 	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /system/subject-token/_current/tokens < ./opal/seed/auth/token.json
