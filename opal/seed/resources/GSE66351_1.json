@@ -1,0 +1,8 @@
+{
+  "name":"GSE66351_1",
+  "project":"test",
+  "provider":"resourcer",
+  "factory":"http-rdata-file",
+  "parameters":"{\"url\":\"https://github.com/isglobal-brge/brgedata/raw/master/data/gse66351_1.rda\", \"format\":\"ExpressionSet\"}",
+  "credentials":"{}"
+}

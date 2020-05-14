@@ -1,8 +1,8 @@
 {
-    "credentials": "{\"username\":\"\", \"password\":\"\"}",
-    "factory": "http-generic-file",
-    "name": "brge_vcf",
-    "parameters": "{\"url\":\"https://raw.githubusercontent.com/isglobal-brge/brgedata/master/inst/extdata/brge.vcf.gz?method=biallelic.only&snpfirstdim=TRUE\", \"format\":\"VCF2GDS\", \"_package\":\"dsOmics\"}",
-    "project": "test",
-    "provider": "opal-resource-commons"
+  "credentials": "{\"username\":\"\", \"password\":\"\"}",
+  "factory": "http-gds-file",
+  "name": "brge_vcf",
+  "parameters": "{\"url\":\"https://raw.githubusercontent.com/isglobal-brge/brgedata/master/inst/extdata/brge.vcf.gz?method=biallelic.only&snpfirstdim=TRUE\", \"format\":\"VCF2GDS\"}",
+  "project": "test",
+  "provider": "dsOmics"
   }

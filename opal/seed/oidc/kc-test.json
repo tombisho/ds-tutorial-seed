@@ -1,0 +1,18 @@
+{
+  "name":"kc-test",
+  "clientId":"opal",
+  "secret":"1aa43945-7166-4292-8f46-c4b836054676",
+  "discoveryURI":"http://localhost:8899/auth/realms/obiba/.well-known/openid-configuration",
+  "scope":"openid profile roles",
+  "useNonce":true,
+  "customParams": {
+    "label":"Keycloak Test",
+    "providerUrl":"http://localhost:8899/auth/realms/obiba/account",
+    "groups":"datashield",
+    "enabled":"true"
+  },
+  "connectTimeout":500,
+  "readTimeout":500,
+  "preferredJwsAlgorithm":null,
+  "maxClockSkew":30
+}
