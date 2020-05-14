@@ -79,6 +79,8 @@ seed-datashield:
 seed-resources:
 	$(call project-create,test,Resources)
 	$(call resource-create,test,GSE66351)
+	$(call resource-create,test,GSE66351_1)
+	$(call resource-create,test,GSE66351_2)
 	$(call resource-create,test,GSE80970)
 	$(call resource-create,test,CNSIM1)
 	$(call resource-create,test,CNSIM2)
@@ -91,6 +93,7 @@ seed-resources:
 	$(call resource-create,test,brge)
 	$(call resource-create,test,brge_plink)
 	$(call resource-create,test,gps_data)
+	$(call resource-create,test,gps_participant)
 	$(call resource-create,test,takeaway_gps)
 	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /system/subject-token/_current/tokens < ./opal/seed/auth/token.json
 	sudo mkdir -p /tmp/rserver/data
