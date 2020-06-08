@@ -1,7 +1,7 @@
 #
 # Drupal
 #
-drupal_version = 7.67
+drupal_version = 7.71
 drupal_dir=$(CURDIR)/target/drupal
 
 admin_user=administrator
@@ -192,8 +192,14 @@ download-lib-dependencies: datatables-prepare obiba-progressbar obiba-timeline o
 
 jquery_update:
 	cd $(drupal_dir) && \
-	drush vset -y --format=string jquery_update_jquery_version 1.10 && \
-	drush vset -y --format=string jquery_update_jquery_admin_version 1.10
+	drush dis -y jquery_update && \
+	rm -rf sites/all/modules/jquery_update && \
+	drush dl -y jquery_update-7.x-3.0-alpha5 && \
+	drush en -y jquery_update && \
+	drush en -y obiba_mica && \
+	drush ev 'variable_set("theme_obiba_bootstrap_settings", array("jquery_update_jquery_version" => 2.2));' && \
+	drush vset -y --format=string jquery_update_jquery_version 2.2 && \
+	drush vset -y jquery_update_jquery_migrate_enable 1
 
 datatables-prepare:
 	cp -r $(drupal_dir)/sites/all/modules/obiba_mica/bower_components/datatables $(drupal_dir)/sites/all/libraries/
@@ -236,8 +242,14 @@ less-css:
 less-css-target:
 	$(call less-css-project,$(project))
 
+less-css-target-map:
+	$(call less-css-project-map,$(project))
+
 less-css-project = lessc $(CURDIR)/../$(1)/less/obiba.less $(CURDIR)/../$(1)/css/obiba.css && \
 	lessc $(CURDIR)/../$(1)/less/style.less $(CURDIR)/../$(1)/css/custom.css
+
+less-css-project-map = lessc $(CURDIR)/../$(1)/less/obiba.less $(CURDIR)/../$(1)/css/obiba.css --source-map=$(CURDIR)/../$(1)/css/obiba.css.map && \
+	lessc $(CURDIR)/../$(1)/less/style.less $(CURDIR)/../$(1)/css/custom.css --source-map=$(CURDIR)/../$(1)/css/custom.css.map
 
 enable-obiba:
 	ln -s $(CURDIR)/../obiba_bootstrap $(drupal_dir)/sites/all/themes/obiba_bootstrap && \
@@ -276,7 +288,7 @@ github-install = cd /tmp && rm -rf $(1)-$(2) && \
 
 # Deploy Mica-Drupal JS Libraries dependencies
 deploy-js-libraries-by-branch = rm -rf /tmp/mica-drupal-js-libraries && \
-	git clone https://github.com/obiba/mica-drupal-js-libraries.git /tmp/mica-drupal-js-libraries && \
+	git clone git@github.com:obiba/mica-drupal-js-libraries.git /tmp/mica-drupal-js-libraries && \
 	cd /tmp/mica-drupal-js-libraries && \
 	git checkout $(1) && \
 	(ls -d */ | xargs git rm -r) && \
