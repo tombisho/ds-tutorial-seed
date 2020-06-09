@@ -3,6 +3,6 @@
   "factory": "ssh",
   "name": "brge_plink",
   "parameters": "{\"host\":\"plink-test.obiba.org\", \"port\":\"2222\", \"workDir\":\"/home/master/brge\", \"exec\":[{\"name\":\"ls\"},{\"name\":\"plink1\"},{\"name\":\"plink\"}]}",
-  "project": "test",
+  "project": "@project@",
   "provider": "resourcer" 
 }

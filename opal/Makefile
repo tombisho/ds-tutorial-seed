@@ -9,6 +9,8 @@ taxonomies_key=4929750633404868
 
 # Database name in opal
 database=opal_data
+# R server
+rserver_home=/var/lib/rserver
 
 opal-help:
 	@echo
@@ -77,32 +79,36 @@ seed-datashield:
 	$(call tables-import,TESTING)
 
 seed-resources:
-	$(call project-create,test,Resources)
-	$(call resource-create,test,GSE66351)
-	$(call resource-create,test,GSE66351_1)
-	$(call resource-create,test,GSE66351_2)
-	$(call resource-create,test,GSE80970)
-	$(call resource-create,test,CNSIM1)
-	$(call resource-create,test,CNSIM2)
-	$(call resource-create,test,CNSIM3)
-	$(call resource-create,test,example.vcf)
-	$(call resource-create,test,1000G_vcf)
-	$(call resource-create,test,1000G_covars)
-	$(call resource-create,test,brge_vcf)
-	$(call resource-create,test,tcga_liver)
-	$(call resource-create,test,brge)
-	$(call resource-create,test,brge_plink)
-	$(call resource-create,test,gps_data)
-	$(call resource-create,test,gps_participant)
-	$(call resource-create,test,takeaway_gps)
+	$(call project-create,RSRC,Resources)
+	$(call resource-create,RSRC,GSE66351)
+	$(call resource-create,RSRC,GSE66351_1)
+	$(call resource-create,RSRC,GSE66351_2)
+	$(call resource-create,RSRC,GSE80970)
+	$(call resource-create,RSRC,CNSIM1)
+	$(call resource-create,RSRC,CNSIM2)
+	$(call resource-create,RSRC,CNSIM3)
+	$(call resource-create,RSRC,example.vcf)
+	$(call resource-create,RSRC,1000G_vcf)
+	$(call resource-create,RSRC,1000G_covars)
+	$(call resource-create,RSRC,brge_vcf)
+	$(call resource-create,RSRC,tcga_liver)
+	$(call resource-create,RSRC,brge)
+	$(call resource-create,RSRC,brge_plink)
+	$(call resource-create,RSRC,gps_data)
+	$(call resource-create,RSRC,gps_participant)
+	$(call resource-create,RSRC,takeaway_gps)
+	sudo mkdir -p $(rserver_home)/data
+	sudo cp opal/seed/data/CNSIM2.zsav $(rserver_home)/data
+	sudo cp opal/seed/data/GSE80970.Rdata $(rserver_home)/data
+	$(call file-upload,opal/seed/data/CNSIM3.zip,/projects/RSRC)
+	$(call file-upload,opal/seed/data/GSE80970.Rdata,/projects/RSRC)
+	$(call file-upload,opal/seed/data/gps_data_final.RData,/projects/RSRC)
+	$(call file-upload,opal/seed/data/gps_participant.RData,/projects/RSRC)
+	$(call file-upload,opal/seed/data/takeaway_data.RData,/projects/RSRC)
+
+seed-auth:
 	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /system/subject-token/_current/tokens < ./opal/seed/auth/token.json
-	sudo mkdir -p /tmp/rserver/data
-	sudo cp opal/seed/data/CNSIM2.zsav /tmp/rserver/data
-	sudo cp opal/seed/data/GSE80970.Rdata /tmp/rserver/data
-	sudo mkdir -p /tmp/opal/fs/projects/test
-	sudo cp opal/seed/data/CNSIM3.zip /tmp/opal/fs/projects/test
-	sudo cp opal/seed/data/*RData /tmp/opal/fs/projects/test
-	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/project/test/permissions/resources?type=USER&permission=RESOURCES_VIEW&principal=dsuser"
+	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/project/RSRC/permissions/resources?type=USER&permission=RESOURCES_VIEW&principal=dsuser"
 	opal user -o $(opal_url) -u $(username) -p $(password) -n dsuser -upa password -a
 	opal perm-datashield -o $(opal_url) -u $(username) -p $(password) -s dsuser -ty user -pe use -a
 
@@ -121,7 +127,8 @@ seed-taxonomies-latest:
 #
 # Functions
 #
-project-create = sed 's/@database@/$(database)/g' ./opal/seed/projects/project-template.json | sed 's/@name@/$(1)/g' | sed 's/@tag@/$(2)/g' | opal rest -o $(opal_url) -u $(username) -p $(password) -m POST /projects --content-type "application/json"
+project-create = opal project -o $(opal_url) -u $(username) -p $(password) --name $(1) --database $(database) --tags $(2) --add && \
+	opal project -o $(opal_url) -u $(username) -p $(password) --name $(1)
 
 tables-import = opal file -o $(opal_url) -u $(username) -p $(password) -up ./opal/seed/dictionaries/$(1).zip /tmp && \
 	opal import-xml -o $(opal_url) -u $(username) -p $(password) -pa /tmp/$(1).zip -d $(1) && \
@@ -131,4 +138,7 @@ taxonomy-import = opal rest -o $(opal_url) -u $(username) -p $(password) -m POST
 
 table-index = opal rest -o $(opal_url) -u $(username) -p $(password) -m PUT "/datasource/$(1)/table/$(2)/index"
 
-resource-create = opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST "/project/$(1)/resources" < ./opal/seed/resources/$(2).json
+resource-create = sed 's/@project@/$(1)/g' ./opal/seed/resources/$(2).json | opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST "/project/$(1)/resources"
+
+file-upload = opal file -o $(opal_url) -u $(username) -p $(password) --upload $(1) $(2)
+

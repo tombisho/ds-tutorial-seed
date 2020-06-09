@@ -1,6 +1,6 @@
 {
   "name":"CNSIM1",
-  "project":"test",
+  "project":"@project@",
   "provider":"resourcer",
   "factory":"sql",
   "parameters":"{\"driver\":\"mysql\", \"host\":\"mysqldata\", \"port\":\"3306\", \"db\":\"opal\", \"table\":\"CNSIM1\"}",

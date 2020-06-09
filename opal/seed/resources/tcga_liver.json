@@ -3,6 +3,6 @@
   "name": "tcga_liver",
   "parameters": "{\"url\":\"https://github.com/isglobal-brge/brgedata/raw/master/data/rse_gene_liver.Rdata\", \"format\":\"RangedSummarizedExperiment\"}",
   "credentials": "{}",
-  "project": "test",
+  "project": "@project@",
   "provider": "resourcer"
   }

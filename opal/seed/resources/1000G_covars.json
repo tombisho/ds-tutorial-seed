@@ -3,6 +3,6 @@
   "factory": "http-tidy-file",
   "name": "1000G_covars",
   "parameters": "{\"url\":\"https://raw.githubusercontent.com/isglobal-brge/brgeUtils/master/data/covars_1000G.txt\", \"format\":\"csv\"}",
-  "project": "test",
+  "project": "@project@",
   "provider": "resourcer"
   }

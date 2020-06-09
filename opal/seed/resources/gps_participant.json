@@ -2,7 +2,7 @@
   "credentials": "{\"token\":\"EeTtQGIob6haio5bx6FUfVvIGkeZJfGq\"}",
   "factory": "opal-rdata-file",
   "name": "gps_participant",
-  "parameters": "{\"url\":\"https://opal-test.obiba.org\", \"path\":\"/projects/test/gps_participant.RData\", \"format\":\"data.frame\"}",
-  "project": "test",
+  "parameters": "{\"url\":\"https://opal-demo.obiba.org\", \"path\":\"/projects/@project@/gps_participant.RData\", \"format\":\"data.frame\"}",
+  "project": "@project@",
   "provider": "resourcer"
 }
