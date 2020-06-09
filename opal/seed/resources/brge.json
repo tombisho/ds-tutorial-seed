@@ -1,0 +1,8 @@
+{
+  "credentials": "{\"username\":\"\", \"password\":\"\"}",
+  "factory": "http-tidy-file",
+  "name": "brge",
+  "parameters": "{\"url\":\"https://raw.githubusercontent.com/isglobal-brge/brgedata/master/inst/extdata/brge.txt\", \"format\":\"tsv\"}",
+  "project": "@project@",
+  "provider": "resourcer"
+  }

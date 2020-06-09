@@ -1,0 +1,8 @@
+{
+  "name":"example.vcf",
+  "project":"@project@",
+  "provider":"dsOmics",
+  "factory":"http-gds-file",
+  "parameters":"{\"url\":\"https://raw.githubusercontent.com/isglobal-brge/scoreInvHap/master/inst/extdata/example.vcf?method=biallelic.only&snpfirstdim=TRUE\", \"format\":\"VCF2GDS\"}",
+  "credentials":"{}"
+}

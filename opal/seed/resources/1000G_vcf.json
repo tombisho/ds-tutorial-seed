@@ -1,0 +1,8 @@
+{
+  "credentials": "{\"username\":\"\", \"password\":\"\"}",
+  "factory": "http-gds-file",
+  "name": "1000G_vcf",
+  "parameters": "{\"url\":\"https://raw.githubusercontent.com/isglobal-brge/brgeUtils/master/data/1KG_phase3_subset_chr22.vcf.gz?method=biallelic.only&snpfirstdim=TRUE\", \"format\":\"VCF2GDS\"}",
+  "project": "@project@",
+  "provider": "dsOmics"
+  }

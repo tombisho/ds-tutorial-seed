@@ -1,0 +1,8 @@
+{
+  "credentials": "{\"token\":\"EeTtQGIob6haio5bx6FUfVvIGkeZJfGq\"}",
+  "factory": "opal-rdata-file",
+  "name": "takeaway_gps",
+  "parameters": "{\"url\":\"https://opal-demo.obiba.org\", \"path\":\"/projects/@project@/takeaway_data.RData\", \"format\":\"SpatialPointsDataFrame\"}",
+  "project": "@project@",
+  "provider": "resourcer" 
+}

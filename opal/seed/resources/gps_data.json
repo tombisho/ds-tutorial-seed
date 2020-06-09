@@ -1,0 +1,8 @@
+{
+  "credentials": "{\"token\":\"EeTtQGIob6haio5bx6FUfVvIGkeZJfGq\"}",
+  "factory": "opal-rdata-file",
+  "name": "gps_data",
+  "parameters": "{\"url\":\"https://opal-demo.obiba.org\", \"path\":\"/projects/@project@/gps_data_final.RData\", \"format\":\"SpatialLinesDataFrame\"}", 
+  "project": "@project@",
+  "provider": "resourcer"
+}

@@ -1,0 +1,8 @@
+{
+  "name":"GSE80970",
+  "project":"@project@",
+  "provider":"resourcer",
+  "factory":"local-rdata-file",
+  "parameters":"{\"path\":\"/srv/data/GSE80970.Rdata\", \"format\":\"ExpressionSet\"}",
+  "credentials":"{}"
+}
