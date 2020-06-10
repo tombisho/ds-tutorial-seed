@@ -80,7 +80,6 @@ seed-datashield:
 
 seed-resources:
 	$(call project-create,RSRC,Resources)
-	$(call resource-create,RSRC,GSE66351)
 	$(call resource-create,RSRC,GSE66351_1)
 	$(call resource-create,RSRC,GSE66351_2)
 	$(call resource-create,RSRC,GSE80970)
