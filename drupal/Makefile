@@ -39,7 +39,7 @@ drupal-help:
 	@echo
 
 # Install drupal with mica/agate related modules for development
-drupal: drupal-clean setup-drupal enable-modules update-composer-autoload cc
+drupal: drupal-clean setup-drupal enable-modules update-composer-autoload cc rebuild-config-menu
 
 # Install drupal with mica/agate related modules for production
 drupal-release: drupal-clean setup-drupal-release enable-modules-release-branch update-composer-autoload cc
@@ -303,3 +303,9 @@ update-composer:
 	drush composer-json-rebuild && \
 	cd sites/default/files/composer/ && \
 	composer dump-autoload -o
+
+rebuild-config-menu:
+	cd $(drupal_dir) && \
+	drush sql-query "DELETE FROM drupal.menu_links WHERE link_path like 'admin/config/obiba-mica%';" && \
+	drush cc all
+
