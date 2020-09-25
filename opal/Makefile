@@ -19,7 +19,7 @@ opal-help:
 	@echo "Available make targets:"
 	@echo "  seed-opal : Seed opal server"
 
-seed-opal: seed-projects seed-tables seed-taxonomies seed-datashield seed-resources seed-auth
+seed-opal: seed-datashield seed-resources seed-auth
 
 seed-projects:
 	$(call project-create,CHPT,Mica)
