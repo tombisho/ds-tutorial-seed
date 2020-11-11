@@ -3,7 +3,7 @@
 #
 opal_url=https://localhost:8443
 username=administrator
-password=password
+password=datashieldtest
 taxonomies_ref=1.0
 taxonomies_key=4929750633404868
 
@@ -110,6 +110,11 @@ seed-auth:
 	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/project/RSRC/permissions/resources?type=USER&permission=RESOURCES_VIEW&principal=dsuser"
 	opal user -o $(opal_url) -u $(username) -p $(password) -n dsuser -upa password -a
 	opal perm-datashield -o $(opal_url) -u $(username) -p $(password) -s dsuser -ty user -pe use -a
+	opal perm-table --opal $(opal_url) --user $(username) --password $(password) --type USER --project CNSIM --subject dsuser  --permission view --add
+	opal perm-table --opal $(opal_url) --user $(username) --password $(password) --type USER --project DASIM --subject dsuser  --permission view --add
+	opal perm-table --opal $(opal_url) --user $(username) --password $(password) --type USER --project DISCORDANT --subject dsuser  --permission view --add
+	opal perm-table --opal $(opal_url) --user $(username) --password $(password) --type USER --project SURVIVAL --subject dsuser  --permission view --add
+	opal perm-table --opal $(opal_url) --user $(username) --password $(password) --type USER --project TESTING --subject dsuser  --permission view --add
 
 seed-taxonomies:
 	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/system/conf/taxonomies/import/_github?user=maelstrom-research&repo=maelstrom-taxonomies&override=true&ref=$(taxonomies_ref)&key=$(taxonomies_key)"
