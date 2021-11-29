@@ -108,7 +108,7 @@ seed-resources:
 seed-auth:
 	opal rest -o $(opal_url) -u $(username) -p $(password) -ct "application/json" -m POST /system/subject-token/_current/tokens < ./opal/seed/auth/token.json
 	opal rest -o $(opal_url) -u $(username) -p $(password) -m POST "/project/RSRC/permissions/resources?type=USER&permission=RESOURCES_VIEW&principal=dsuser"
-	opal user -o $(opal_url) -u $(username) -p $(password) -n dsuser -upa password -a
+	opal user -o $(opal_url) -u $(username) -p $(password) -n dsuser -upa P@ssw0rd -a
 	opal perm-datashield -o $(opal_url) -u $(username) -p $(password) -s dsuser -ty user -pe use -a
 	opal perm-table --opal $(opal_url) --user $(username) --password $(password) --type USER --project CNSIM --subject dsuser  --permission view --add
 	opal perm-table --opal $(opal_url) --user $(username) --password $(password) --type USER --project DASIM --subject dsuser  --permission view --add
